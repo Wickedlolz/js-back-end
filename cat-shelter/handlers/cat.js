@@ -16,8 +16,28 @@ module.exports = (req, res) => {
                 res.write('404 Not Found');
                 res.end();
             } else {
-                res.write(data.toString());
-                res.end();
+                fs.readFile(
+                    './data/breeds.json',
+                    { encoding: 'utf-8' },
+                    (err, breedsData) => {
+                        if (err) {
+                            console.error(err);
+                            return;
+                        }
+
+                        const breeds = JSON.parse(breedsData);
+                        const file = data.toString().replace(
+                            '{{{breeds}}}',
+                            breeds.map(
+                                (b) =>
+                                    `<option value="${b.name}">${b.name}</option>`
+                            )
+                        );
+
+                        res.write(file);
+                        res.end();
+                    }
+                );
             }
         });
     } else if (pathname == '/cats/add-breed' && req.method == 'GET') {
