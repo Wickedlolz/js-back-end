@@ -1,5 +1,6 @@
 const fs = require('fs');
 const formidable = require('formidable');
+const uniqid = require('uniqid');
 
 module.exports = (req, res) => {
     const pathname = new URL(req.url, 'http://localhost:3000').pathname;
@@ -60,9 +61,11 @@ module.exports = (req, res) => {
                     } else {
                         const cats = JSON.parse(data);
                         cats.push({
+                            id: uniqid(),
                             name: fields.name,
                             description: fields.description,
                             breed: fields.breed,
+                            image: fields.image,
                         });
                         fs.writeFile(
                             './data/cats.json',

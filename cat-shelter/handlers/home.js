@@ -1,10 +1,9 @@
 const fs = require('fs');
 const path = require('path');
-const cats = require('../data/cats.json');
 
 const catCard = (cat) => `
     <li>
-        <img src="${cat.image || ''}" alt="Black Cat">
+        <img src="${cat.image}" alt="Black Cat">
         <h3>${cat.name}</h3>
         <p><span>Breed: </span>${cat.breed}</p>
         <p><span>Description: </span>${cat.description}</p>
@@ -32,11 +31,24 @@ module.exports = (req, res) => {
                 res.write('404 Not Found');
                 res.end();
             } else {
-                const homePage = data
-                    .toString()
-                    .replace('{{{cats}}}', cats.map(catCard).join(''));
-                res.write(homePage);
-                res.end();
+                fs.readFile(
+                    './data/cats.json',
+                    { encoding: 'utf-8' },
+                    (error, catsData) => {
+                        if (error) {
+                            console.error(error);
+                            return;
+                        }
+
+                        const cats = JSON.parse(catsData);
+
+                        const homePage = data
+                            .toString()
+                            .replace('{{{cats}}}', cats.map(catCard).join(''));
+                        res.write(homePage);
+                        res.end();
+                    }
+                );
             }
         });
     } else {

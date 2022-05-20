@@ -13,6 +13,7 @@
         "nodemon": "^2.0.16"
     },
     "dependencies": {
-        "formidable": "^2.0.1"
+        "formidable": "^2.0.1",
+        "uniqid": "^5.4.0"
     }
 }
