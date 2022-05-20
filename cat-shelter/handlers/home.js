@@ -34,7 +34,7 @@ module.exports = (req, res) => {
             } else {
                 const homePage = data
                     .toString()
-                    .replace('{{cats}}', cats.map(catCard).join(''));
+                    .replace('{{{cats}}}', cats.map(catCard).join(''));
                 res.write(homePage);
                 res.end();
             }
