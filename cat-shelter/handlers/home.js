@@ -8,7 +8,7 @@ const catCard = (cat) => `
         <p><span>Breed: </span>${cat.breed}</p>
         <p><span>Description: </span>${cat.description}</p>
         <ul class="buttons">
-            <li class="btn edit"><a href="/edit/${cat.id}">Change Info</a></li>
+            <li class="btn edit"><a href="/cats/edit?id=${cat.id}">Change Info</a></li>
             <li class="btn delete"><a href="">New Home</a></li>
         </ul>
     </li>

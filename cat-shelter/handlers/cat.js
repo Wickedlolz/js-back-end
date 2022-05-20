@@ -146,6 +146,46 @@ module.exports = (req, res) => {
                 }
             );
         });
+    } else if (pathname.includes('/cats/edit') && req.method == 'GET') {
+        const [_, id] = new URL(req.url, 'http://localhost:3000').search.split(
+            '='
+        );
+        fs.readFile(
+            './views/editCat.html',
+            { encoding: 'utf-8' },
+            (err, data) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+
+                fs.readFile(
+                    './data/cats.json',
+                    { encoding: 'utf-8' },
+                    (err, catData) => {
+                        if (err) {
+                            console.error(err);
+                            return;
+                        }
+
+                        const cats = JSON.parse(catData);
+                        const cat = cats.find((c) => c.id == id);
+                        let file = data.toString();
+                        file = file.replace('{{{name}}}', cat.name);
+                        file = file.replace(
+                            '{{{description}}}',
+                            cat.description
+                        );
+                        file = file.replace('{{{image}}}', cat.image);
+                        file = file.replace('{{{breedValue}}}', cat.breed);
+                        file = file.replace('{{{breed}}}', cat.breed);
+
+                        res.write(file);
+                        res.end();
+                    }
+                );
+            }
+        );
     } else {
         return true;
     }
