@@ -4,7 +4,7 @@ const cats = require('../data/cats.json');
 
 const catCard = (cat) => `
     <li>
-        <img src="${cat.image}" alt="Black Cat">
+        <img src="${cat.image || ''}" alt="Black Cat">
         <h3>${cat.name}</h3>
         <p><span>Breed: </span>${cat.breed}</p>
         <p><span>Description: </span>${cat.description}</p>

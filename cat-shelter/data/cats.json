@@ -33,5 +33,10 @@
         "image": "https://cdn.pixabay.com/photo/2014/04/13/20/49/cat-323262_1280.jpg",
         "breed": "Bombay Cat",
         "description": "Dominant and aggressive to other cats. Will probably eat you in your sleep. Very cute tho."
+    },
+    {
+        "name": "Jessy",
+        "description": "One persian cat which looking for new home.",
+        "breed": "Fluffy Cat"
     }
 ]
