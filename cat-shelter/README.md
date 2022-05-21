@@ -19,3 +19,20 @@
     -   Deletes specific cat from database. Changes must be persisted in "database"
 -   ### Search Cat
     -   Search in cat "database" by some query string and shows the results if any
+
+## Screenshots
+
+Home Page
+![home page](screenshots/homePNG.PNG)
+
+Add Cat
+![add cat](screenshots/addCat.PNG)
+
+Add Breed
+![add breed](screenshots/addBreed.PNG)
+
+Change Info
+![change info](screenshots/changeInfo.PNG)
+
+New Home
+![new home](screenshots/newHome.PNG)
