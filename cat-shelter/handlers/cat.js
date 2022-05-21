@@ -170,19 +170,45 @@ module.exports = (req, res) => {
 
                         const cats = JSON.parse(catData);
                         const cat = cats.find((c) => c.id == id);
-                        let file = data.toString();
-                        file = file.replace('{{{id}}}', cat.id);
-                        file = file.replace('{{{name}}}', cat.name);
-                        file = file.replace(
-                            '{{{description}}}',
-                            cat.description
-                        );
-                        file = file.replace('{{{image}}}', cat.image);
-                        file = file.replace('{{{breedValue}}}', cat.breed);
-                        file = file.replace('{{{breed}}}', cat.breed);
 
-                        res.write(file);
-                        res.end();
+                        fs.readFile(
+                            './data/breeds.json',
+                            { encoding: 'utf-8' },
+                            (err, breedsData) => {
+                                if (err) {
+                                    console.error(err);
+                                    return;
+                                }
+
+                                const breeds = JSON.parse(breedsData);
+
+                                let file = data.toString();
+                                file = file.replace('{{{id}}}', cat.id);
+                                file = file.replace('{{{name}}}', cat.name);
+                                file = file.replace(
+                                    '{{{description}}}',
+                                    cat.description
+                                );
+                                file = file.replace('{{{image}}}', cat.image);
+                                file = file.replace(
+                                    '{{{breedValue}}}',
+                                    cat.breed
+                                );
+                                file = file.replace('{{{breed}}}', cat.breed);
+                                file = file.replace(
+                                    '{{{catBreeds}}}',
+                                    breeds
+                                        .map(
+                                            (b) =>
+                                                `<option value="${b.name}">${b.name}</option>`
+                                        )
+                                        .join('')
+                                );
+
+                                res.write(file);
+                                res.end();
+                            }
+                        );
                     }
                 );
             }
@@ -210,25 +236,32 @@ module.exports = (req, res) => {
 
                     const cats = JSON.parse(data);
                     let cat = cats.find((c) => c.id == id);
-                    cat.name = fields.name;
-                    cat.description = fields.description;
-                    cat.image = fields.image;
-                    cat.breed = fields.breed;
 
-                    fs.writeFile(
-                        './data/cats.json',
-                        JSON.stringify(cats),
-                        'utf-8',
-                        (err) => {
-                            if (err) {
-                                console.error(err);
-                                return;
+                    if (cat != undefined) {
+                        cat.name = fields.name;
+                        cat.description = fields.description;
+                        cat.image = fields.image;
+                        cat.breed = fields.breed;
+
+                        fs.writeFile(
+                            './data/cats.json',
+                            JSON.stringify(cats),
+                            'utf-8',
+                            (err) => {
+                                if (err) {
+                                    console.error(err);
+                                    return;
+                                }
                             }
-                        }
-                    );
+                        );
 
-                    res.writeHead(301, { Location: '/' });
-                    res.end();
+                        res.writeHead(301, { Location: '/' });
+                        res.end();
+                    } else {
+                        console.error('Cat not found');
+                        res.writeHead(301, { Location: '/' });
+                        res.end();
+                    }
                 }
             );
         });
