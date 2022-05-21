@@ -9,7 +9,7 @@ const catCard = (cat) => `
         <p><span>Description: </span>${cat.description}</p>
         <ul class="buttons">
             <li class="btn edit"><a href="/cats/edit?id=${cat.id}">Change Info</a></li>
-            <li class="btn delete"><a href="">New Home</a></li>
+            <li class="btn delete"><a href="/cats-find-new-home?id=${cat.id}">New Home</a></li>
         </ul>
     </li>
 `;

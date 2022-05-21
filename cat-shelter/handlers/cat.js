@@ -265,6 +265,89 @@ module.exports = (req, res) => {
                 }
             );
         });
+    } else if (
+        pathname.includes('/cats-find-new-home') &&
+        req.method == 'GET'
+    ) {
+        const [_, id] = new URL(req.url, 'http://localhost:3000').search.split(
+            '='
+        );
+
+        fs.readFile(
+            './views/catShelter.html',
+            { encoding: 'utf-8' },
+            (err, data) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+
+                fs.readFile(
+                    './data/cats.json',
+                    { encoding: 'utf-8' },
+                    (err, catsData) => {
+                        if (err) {
+                            console.error(err);
+                            return;
+                        }
+
+                        const cats = JSON.parse(catsData);
+                        let cat = cats.find((c) => c.id == id);
+
+                        if (cat != undefined) {
+                            let file = data.toString();
+                            file = file.replace('{{{id}}}', cat.id);
+                            file = file.replace('{{{name}}}', cat.name);
+                            file = file.replace(
+                                '{{{description}}}',
+                                cat.description
+                            );
+                            file = file.replace('{{{breedValue}}}', cat.breed);
+                            file = file.replace('{{{breed}}}', cat.breed);
+                            file = file.replace('{{{image}}}', cat.image);
+
+                            res.write(file);
+                            res.end();
+                        }
+                    }
+                );
+            }
+        );
+    } else if (
+        pathname.includes('/cats-find-new-home') &&
+        req.method == 'POST'
+    ) {
+        const [_, id] = new URL(req.url, 'http://localhost:3000').search.split(
+            '='
+        );
+
+        fs.readFile('./data/cats.json', { encoding: 'utf-8' }, (err, data) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+
+            const cats = JSON.parse(data);
+            const index = cats.findIndex((c) => c.id == id);
+
+            if (index != -1) {
+                cats.splice(index, 1);
+            }
+
+            fs.writeFile(
+                './data/cats.json',
+                JSON.stringify(cats),
+                { encoding: 'utf-8' },
+                (err) => {
+                    if (err) {
+                        console.error(err);
+                    }
+                }
+            );
+
+            res.writeHead(301, { Location: '/' });
+            res.end();
+        });
     } else {
         return true;
     }
