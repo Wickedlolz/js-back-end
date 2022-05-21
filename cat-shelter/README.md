@@ -36,3 +36,9 @@ Change Info
 
 New Home
 ![new home](screenshots/newHome.PNG)
+
+## How to run
+
+-   Download repo or clone it
+-   `npm i` for installing dependencies
+-   `npm run dev` to start it with nodemon
