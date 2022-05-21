@@ -171,6 +171,7 @@ module.exports = (req, res) => {
                         const cats = JSON.parse(catData);
                         const cat = cats.find((c) => c.id == id);
                         let file = data.toString();
+                        file = file.replace('{{{id}}}', cat.id);
                         file = file.replace('{{{name}}}', cat.name);
                         file = file.replace(
                             '{{{description}}}',
@@ -186,6 +187,51 @@ module.exports = (req, res) => {
                 );
             }
         );
+    } else if (pathname.includes('/cats/edit') && req.method == 'POST') {
+        const [_, id] = new URL(req.url, 'http://localhost:3000').search.split(
+            '='
+        );
+
+        const form = formidable({ multiples: true });
+        form.parse(req, (err, fields, files) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+
+            fs.readFile(
+                './data/cats.json',
+                { encoding: 'utf-8' },
+                (error, data) => {
+                    if (error) {
+                        console.error(error);
+                        return;
+                    }
+
+                    const cats = JSON.parse(data);
+                    let cat = cats.find((c) => c.id == id);
+                    cat.name = fields.name;
+                    cat.description = fields.description;
+                    cat.image = fields.image;
+                    cat.breed = fields.breed;
+
+                    fs.writeFile(
+                        './data/cats.json',
+                        JSON.stringify(cats),
+                        'utf-8',
+                        (err) => {
+                            if (err) {
+                                console.error(err);
+                                return;
+                            }
+                        }
+                    );
+
+                    res.writeHead(301, { Location: '/' });
+                    res.end();
+                }
+            );
+        });
     } else {
         return true;
     }
