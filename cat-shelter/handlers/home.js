@@ -51,6 +51,47 @@ module.exports = (req, res) => {
                 );
             }
         });
+    } else if (pathname.includes('/search') && req.method == 'GET') {
+        const [_, search] = new URL(
+            req.url,
+            'http://localhost:3000'
+        ).search.split('=');
+
+        fs.readFile(
+            './views/home/index.html',
+            { encoding: 'utf-8' },
+            (err, data) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+
+                fs.readFile(
+                    './data/cats.json',
+                    { encoding: 'utf-8' },
+                    (err, catsData) => {
+                        if (err) {
+                            console.error(err);
+                            return;
+                        }
+
+                        let cats = JSON.parse(catsData);
+
+                        cats = cats.filter((c) =>
+                            c.name
+                                .toLocaleLowerCase()
+                                .includes(search.toLocaleLowerCase())
+                        );
+
+                        const homePage = data
+                            .toString()
+                            .replace('{{{cats}}}', cats.map(catCard).join(''));
+                        res.write(homePage);
+                        res.end();
+                    }
+                );
+            }
+        );
     } else {
         return true;
     }
