@@ -4,6 +4,8 @@
 
 ## Requirments
 
+Document with requirments [here](https://github.com/Wickedlolz/js-back-end/blob/main/03.%20Cubicle-Workshop-Part-1.docx) provided from [SoftUni](https://softuni.bg/)
+
 ### Part 1
 
 1.  Cube Model
