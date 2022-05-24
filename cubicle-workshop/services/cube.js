@@ -1,6 +1,11 @@
 const Cube = require('../models/Cube');
 const fs = require('fs/promises');
 
+exports.getAll = async function getAll() {
+    const cubes = await readCubes();
+    return cubes;
+};
+
 exports.create = async function create(data) {
     const cubes = await readCubes();
     const cube = new Cube(
@@ -27,7 +32,7 @@ async function readCubes() {
 }
 
 async function writeCube(data) {
-    await fs.writeFile('./config/database.json', JSON.stringify(data), {
+    return await fs.writeFile('./config/database.json', JSON.stringify(data), {
         encoding: 'utf-8',
     });
 }

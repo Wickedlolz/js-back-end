@@ -3,6 +3,10 @@ const router = require('express').Router();
 const cubeService = require('../services/cube');
 
 router.get('/create', (req, res) => {
+    res.locals = {
+        title: 'Create',
+    };
+
     res.render('create');
 });
 
