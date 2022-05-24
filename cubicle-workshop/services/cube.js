@@ -1,12 +1,12 @@
 const Cube = require('../models/Cube');
 const fs = require('fs/promises');
 
-exports.getAll = async function getAll() {
+exports.getAll = async function () {
     const cubes = await readCubes();
     return cubes;
 };
 
-exports.create = async function create(data) {
+exports.create = async function (data) {
     const cubes = await readCubes();
     const cube = new Cube(
         data.name,
@@ -18,6 +18,13 @@ exports.create = async function create(data) {
     cubes.push(cube);
 
     await writeCube(cubes);
+    return cube;
+};
+
+exports.getById = async function (id) {
+    const cubes = await readCubes();
+    const cube = cubes.find((c) => c.id == id);
+
     return cube;
 };
 

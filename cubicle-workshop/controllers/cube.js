@@ -22,7 +22,15 @@ router.post('/create', async (req, res) => {
     res.redirect('/');
 });
 
-router.get('/details/:id', (req, res) => {
+router.get('/details/:id', async (req, res) => {
+    const id = req.params.id;
+    const cube = await cubeService.getById(id);
+
+    res.locals = {
+        title: cube.name,
+        cube,
+    };
+
     res.render('details');
 });
 
