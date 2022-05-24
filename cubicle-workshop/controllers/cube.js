@@ -26,12 +26,16 @@ router.get('/details/:id', async (req, res) => {
     const id = req.params.id;
     const cube = await cubeService.getById(id);
 
-    res.locals = {
-        title: cube.name,
-        cube,
-    };
+    if (cube == undefined) {
+        res.render('404');
+    } else {
+        res.locals = {
+            title: cube.name,
+            cube,
+        };
 
-    res.render('details');
+        res.render('details');
+    }
 });
 
 router.post('/details/:id', (req, res) => {

@@ -1,1 +1,30 @@
-[{"id":"1n7z6z6zwl3k8osed","name":"Gan356 Air SM","description":"Magnets in AirSM will not drop, and their positions will be more precise with the Magnets-Snap-On design. With the use of 3mm*2mm magnets, the handfeel will be more stable and more comfortable. P.S. This design is brand new for the AirSM.","imageUrl":"https://ae01.alicdn.com/kf/HTB1CSddXRxRMKJjy0Fdq6yifFXa6/Gan-356-Air-SM-3x3-Black-Magic-cube-GAN-Air-SM-Magnetic-3x3x3-Speed-cube-gans.jpg","difficultyLevel":"3"},{"id":"1n7z6z48sl3k91pt4","name":"Eco-Dark","description":"Magnets in AirSM will not drop, and their positions will be more precise\r\n        with the Magnets-Snap-On design. With the use of 3mm*2mm magnets, the\r\n        handfeel will be more stable and more comfortable. P.S. This design is\r\n        brand new for the AirSM.","imageUrl":"https://thingsidesire.com/wp-content/uploads/2018/06/Eco-Dark-Rubik%E2%80%99s-Cube2.jpg","difficultyLevel":"6"},{"id":"1n7z6z5l0l3k928fv","name":"Pyraminx","description":"Magnets in AirSM will not drop, and their positions will be more precise\r\n        with the Magnets-Snap-On design. With the use of 3mm*2mm magnets, the\r\n        handfeel will be more stable and more comfortable. P.S. This design is\r\n        brand new for the AirSM.","imageUrl":"https://images-na.ssl-images-amazon.com/images/I/61izOzq%2BBAL._SY355_.jpg","difficultyLevel":"1"},{"id":"1n7z6z75gl3k9329w","name":"Megaminx","description":"Magnets in AirSM will not drop, and their positions will be more precise with the Magnets-Snap-On design. With the use of 3mm*2mm magnets, the handfeel will be more stable and more comfortable. P.S. This design is brand new for the AirSM.","imageUrl":"https://images-na.ssl-images-amazon.com/images/I/61HpQqVQ37L._SY355_.jpg","difficultyLevel":"3"},{"id":"1n7z6z5z8l3k94d5f","name":"1","description":"2","imageUrl":"3","difficultyLevel":"6"}]
+[
+    {
+        "id": "1n7z6z6zwl3k8osed",
+        "name": "Gan356 Air SM",
+        "description": "Magnets in AirSM will not drop, and their positions will be more precise with the Magnets-Snap-On design. With the use of 3mm*2mm magnets, the handfeel will be more stable and more comfortable. P.S. This design is brand new for the AirSM.",
+        "imageUrl": "https://ae01.alicdn.com/kf/HTB1CSddXRxRMKJjy0Fdq6yifFXa6/Gan-356-Air-SM-3x3-Black-Magic-cube-GAN-Air-SM-Magnetic-3x3x3-Speed-cube-gans.jpg",
+        "difficultyLevel": "3"
+    },
+    {
+        "id": "1n7z6z48sl3k91pt4",
+        "name": "Eco-Dark",
+        "description": "Magnets in AirSM will not drop, and their positions will be more precise\r\n        with the Magnets-Snap-On design. With the use of 3mm*2mm magnets, the\r\n        handfeel will be more stable and more comfortable. P.S. This design is\r\n        brand new for the AirSM.",
+        "imageUrl": "https://thingsidesire.com/wp-content/uploads/2018/06/Eco-Dark-Rubik%E2%80%99s-Cube2.jpg",
+        "difficultyLevel": "6"
+    },
+    {
+        "id": "1n7z6z5l0l3k928fv",
+        "name": "Pyraminx",
+        "description": "Magnets in AirSM will not drop, and their positions will be more precise\r\n        with the Magnets-Snap-On design. With the use of 3mm*2mm magnets, the\r\n        handfeel will be more stable and more comfortable. P.S. This design is\r\n        brand new for the AirSM.",
+        "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/61izOzq%2BBAL._SY355_.jpg",
+        "difficultyLevel": "1"
+    },
+    {
+        "id": "1n7z6z75gl3k9329w",
+        "name": "Megaminx",
+        "description": "Magnets in AirSM will not drop, and their positions will be more precise with the Magnets-Snap-On design. With the use of 3mm*2mm magnets, the handfeel will be more stable and more comfortable. P.S. This design is brand new for the AirSM.",
+        "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/61HpQqVQ37L._SY355_.jpg",
+        "difficultyLevel": "3"
+    }
+]
