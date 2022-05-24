@@ -1,5 +1,5 @@
 const homeController = require('../controllers/home');
 
 module.exports = (app) => {
-    app.get('/', homeController.get);
+    app.use('/', homeController);
 };
