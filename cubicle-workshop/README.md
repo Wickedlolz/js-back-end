@@ -4,29 +4,29 @@
 
 ## Requirments
 
-Document with requirments [here](https://github.com/Wickedlolz/js-back-end/blob/main/03.%20Cubicle-Workshop-Part-1.docx) provided from [SoftUni](https://softuni.bg/)
+Document with requirments [**here**](https://github.com/Wickedlolz/js-back-end/blob/main/03.%20Cubicle-Workshop-Part-1.docx) provided from [**SoftUni**](https://softuni.bg/)
 
 ### Part 1
 
 1.  Cube Model
 
-    -   Id - (number)
-    -   Name - (string)
-    -   Description - (string)
-    -   Image URL - (string)
-    -   Difficulty Level - (number)
+    -   **Id** - (number)
+    -   **Name** - (string)
+    -   **Description** - (string)
+    -   **Image URL** - (string)
+    -   **Difficulty Level** - (number)
 
 2.  Storage
 
-    Store the cubes inside a /config/database.json
+    Store the cubes inside a **/config/database.json**
 
 3.  Routes
 
-    -   / - the main page (should visualize all the cubes in the database and a search field)
-    -   /about – should render the about page
-    -   /create – should render the create cube form
-    -   /details/:id – should render the details page about selected cube
-    -   Any other - should render the 404 not found page
+    -   **/** - the main page (should visualize all the cubes in the database and a search field)
+    -   **/about** – should render the about page
+    -   **/create** – should render the create cube form
+    -   **/details/:id** – should render the details page about selected cube
+    -   **Any other** - should render the 404 not found page
 
 4.  Create Templates
 
@@ -38,4 +38,4 @@ Document with requirments [here](https://github.com/Wickedlolz/js-back-end/blob/
 
     -   If the user searches only a string and NO difficulty, render all difficulties
 
-    If the search does NOT meet the requirements, just redirect to the home page ('/').
+    If the search does NOT meet the requirements, just redirect to the home page **('/')**.
