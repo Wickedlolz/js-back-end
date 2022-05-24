@@ -1,5 +1,5 @@
-// TODO: Require Controllers...
+const homeController = require('../controllers/home');
 
 module.exports = (app) => {
-    // TODO...
+    app.get('/', homeController.get);
 };
