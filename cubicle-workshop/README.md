@@ -4,7 +4,7 @@
 
 ## Requirments
 
-Document with requirments [**here**](https://github.com/Wickedlolz/js-back-end/blob/main/03.%20Cubicle-Workshop-Part-1.docx) provided from [**SoftUni**](https://softuni.bg/)
+Document with requirments Part 1 [**here**](https://github.com/Wickedlolz/js-back-end/blob/main/03.%20Cubicle-Workshop-Part-1.docx) provided from [**SoftUni**](https://softuni.bg/)
 
 ### Part 1
 
@@ -39,3 +39,35 @@ Document with requirments [**here**](https://github.com/Wickedlolz/js-back-end/b
     -   If the user searches only a string and NO difficulty, render all difficulties
 
     If the search does NOT meet the requirements, just redirect to the home page **('/')**.
+
+### Part 2
+
+## Main Task
+
+Now it's time to upgrade your app and implement a few new features. For instance, replace the way you store data using MongoDB and Mongoose, create and attach new accessories to each cube, make some relations between them, and include a few more pages.
+
+Document with requirments Part 2 [**here**]() provided from [**SoftUni**](https://softuni.bg/)
+
+### Cube Mongoose Model
+
+-   **Id** - (objectId)
+-   **Name** - (String, required)
+-   **Description** - (String, required, max length validation)
+-   **Image URL** - (String, required, http/https validation)
+-   **Difficulty Level** - (Number, required, min and max valid range)
+-   **Accessories** - (ObjectId, ref Accessories Model)
+
+### Accessory Mongoose Model
+
+-   **Id** - (ObjectId)
+-   **Name** - (String, required)
+-   **Image URL** - (String, required, http/https validation)
+-   **Description** - (String, required, max length validation)
+-   **Cubes** - (ObjectId, ref Cubes Model)
+
+## Additional Pages
+
+-   **/create/accessory** - should render the create an accessory form
+-   **/attach/accessory/:id** - should render the accessory page about attaching new accessory for cube
+
+And update the view on /details/:id route, that renders the cube's details.
