@@ -29,7 +29,7 @@ exports.getById = async function (id) {
 };
 
 async function readCubes() {
-    const cubesData = await fs.readFile('./config/database.json', {
+    const cubesData = await fs.readFile('./src/config/database.json', {
         encoding: 'utf-8',
     });
 
@@ -39,7 +39,11 @@ async function readCubes() {
 }
 
 async function writeCube(data) {
-    return await fs.writeFile('./config/database.json', JSON.stringify(data), {
-        encoding: 'utf-8',
-    });
+    return await fs.writeFile(
+        './src/config/database.json',
+        JSON.stringify(data),
+        {
+            encoding: 'utf-8',
+        }
+    );
 }
