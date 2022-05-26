@@ -46,7 +46,7 @@ Document with requirments Part 1 [**here**](https://github.com/Wickedlolz/js-bac
 
 Now it's time to upgrade your app and implement a few new features. For instance, replace the way you store data using MongoDB and Mongoose, create and attach new accessories to each cube, make some relations between them, and include a few more pages.
 
-Document with requirments Part 2 [**here**]() provided from [**SoftUni**](https://softuni.bg/)
+Document with requirments Part 2 [**here**](https://github.com/Wickedlolz/js-back-end/blob/main/04.%20Cubicle-Workshop-Part-2.docx) provided from [**SoftUni**](https://softuni.bg/)
 
 ### Cube Mongoose Model
 
