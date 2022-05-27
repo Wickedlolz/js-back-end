@@ -1,14 +1,9 @@
 const { Schema, model, Types } = require('mongoose');
 
-const cubeSchema = new Schema({
+const accessorySchema = new Schema({
     name: {
         type: String,
         required: true,
-    },
-    description: {
-        type: String,
-        required: true,
-        maxlength: 200,
     },
     imageUrl: {
         type: String,
@@ -17,21 +12,20 @@ const cubeSchema = new Schema({
             validator: (value) => {
                 return value.startsWith('http') || value.startsWith('https');
             },
-            message: 'Not valid image url.',
+            message: 'Not valid image url',
         },
     },
-    difficultyLevel: {
-        type: Number,
+    description: {
+        type: String,
         required: true,
-        min: 1,
-        max: 6,
+        maxlength: 200,
     },
-    accessories: {
+    cubes: {
         type: [Types.ObjectId],
-        ref: 'Accessory',
+        ref: 'Cube',
     },
 });
 
-const Cube = model('Cube', cubeSchema);
+const Accessory = model('Accessory', accessorySchema);
 
-module.exports = Cube;
+module.exports = Accessory;
