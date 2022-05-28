@@ -1,5 +1,4 @@
 const Cube = require('../models/Cube');
-const fs = require('fs/promises');
 
 exports.getAll = async function () {
     const cubes = await Cube.find({}).lean();
@@ -20,28 +19,7 @@ exports.create = async function (data) {
 };
 
 exports.getById = async function (id) {
-    const cubes = await readCubes();
-    const cube = cubes.find((c) => c.id == id);
+    const cube = await Cube.findById(id).lean();
 
     return cube;
 };
-
-async function readCubes() {
-    const cubesData = await fs.readFile('./src/config/database.json', {
-        encoding: 'utf-8',
-    });
-
-    const cubes = JSON.parse(cubesData);
-
-    return cubes;
-}
-
-async function writeCube(data) {
-    return await fs.writeFile(
-        './src/config/database.json',
-        JSON.stringify(data),
-        {
-            encoding: 'utf-8',
-        }
-    );
-}
