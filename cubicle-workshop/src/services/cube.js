@@ -2,22 +2,20 @@ const Cube = require('../models/Cube');
 const fs = require('fs/promises');
 
 exports.getAll = async function () {
-    const cubes = await readCubes();
+    const cubes = await Cube.find({}).lean();
     return cubes;
 };
 
 exports.create = async function (data) {
-    const cubes = await readCubes();
-    const cube = new Cube(
-        data.name,
-        data.description,
-        data.imageUrl,
-        data.difficultyLevel
-    );
+    const cube = new Cube({
+        name: data.name,
+        description: data.description,
+        imageUrl: data.imageUrl,
+        difficultyLevel: data.difficultyLevel,
+    });
 
-    cubes.push(cube);
+    await cube.save();
 
-    await writeCube(cubes);
     return cube;
 };
 

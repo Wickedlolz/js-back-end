@@ -18,8 +18,12 @@ router.post('/create', async (req, res) => {
         difficultyLevel: req.body.difficultyLevel,
     };
 
-    const cube = await cubeService.create(data);
-    res.redirect('/');
+    try {
+        const cube = await cubeService.create(data);
+        res.redirect('/');
+    } catch (error) {
+        Object.values(error.errors).forEach((e) => console.log(e.message));
+    }
 });
 
 router.get('/details/:id', async (req, res) => {
