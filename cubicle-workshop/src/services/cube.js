@@ -19,7 +19,14 @@ exports.create = async function (data) {
 };
 
 exports.getById = async function (id) {
-    const cube = await Cube.findById(id).lean();
+    const cube = await Cube.findById(id).populate('accessories').lean();
 
     return cube;
+};
+
+exports.addAccessoryToCube = async function (cubeId, accessoryId) {
+    const cube = await Cube.findById(cubeId);
+    cube.accessories.push(accessoryId);
+
+    await cube.save();
 };

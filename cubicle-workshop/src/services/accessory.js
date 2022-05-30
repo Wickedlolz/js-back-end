@@ -1,4 +1,5 @@
 const Accessory = require('../models/Accessory');
+const cubeService = require('./cube');
 
 exports.getAll = async function () {
     const accessories = await Accessory.find({}).lean();
@@ -15,4 +16,11 @@ exports.create = async function (data) {
     await accessory.save();
 
     return accessory;
+};
+
+exports.addCubeToAccessory = async function (accessoryId, cubeId) {
+    const accessory = await Accessory.findById(accessoryId);
+    accessory.cubes.push(cubeId);
+
+    await accessory.save();
 };
