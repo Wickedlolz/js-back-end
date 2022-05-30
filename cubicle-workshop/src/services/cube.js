@@ -1,7 +1,7 @@
 const Cube = require('../models/Cube');
 
 exports.getAll = async function () {
-    const cubes = await Cube.find({}).lean();
+    const cubes = await Cube.find({}).populate('accessories').lean();
     return cubes;
 };
 

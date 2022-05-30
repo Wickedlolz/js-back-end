@@ -31,6 +31,7 @@ router.get('/details/:id', async (req, res) => {
 
     try {
         const cube = await cubeService.getById(id);
+
         res.locals = {
             title: cube.name,
             cube,
