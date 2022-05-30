@@ -28,17 +28,18 @@ router.post('/create', async (req, res) => {
 
 router.get('/details/:id', async (req, res) => {
     const id = req.params.id;
-    const cube = await cubeService.getById(id);
 
-    if (cube == undefined) {
-        res.render('404');
-    } else {
+    try {
+        const cube = await cubeService.getById(id);
         res.locals = {
             title: cube.name,
             cube,
         };
 
         res.render('details');
+    } catch (error) {
+        console.error(error);
+        res.render('404');
     }
 });
 
