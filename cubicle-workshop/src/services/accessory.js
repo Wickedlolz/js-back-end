@@ -1,8 +1,7 @@
 const Accessory = require('../models/Accessory');
-const cubeService = require('./cube');
 
 exports.getAll = async function () {
-    const accessories = await Accessory.find({}).lean();
+    const accessories = await Accessory.find({}).populate('cubes').lean();
     return accessories;
 };
 

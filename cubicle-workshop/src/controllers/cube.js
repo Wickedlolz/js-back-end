@@ -44,8 +44,4 @@ router.get('/details/:id', async (req, res) => {
     }
 });
 
-router.post('/details/:id', (req, res) => {
-    res.send('POST details');
-});
-
 module.exports = router;

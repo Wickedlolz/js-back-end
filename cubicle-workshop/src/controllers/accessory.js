@@ -28,6 +28,10 @@ router.get('/attach/accessory/:id', async (req, res) => {
     const cube = await cubeService.getById(id);
     let accessories = await accessoryService.getAll();
 
+    accessories = accessories.filter((a) => {
+        return Object.values(a.cubes).find((c) => c._id == id) ? false : true;
+    });
+
     res.render('attachAccessory', {
         title: 'Attach Accessory',
         cube,
