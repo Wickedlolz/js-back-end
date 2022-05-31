@@ -1,7 +1,32 @@
 const Cube = require('../models/Cube');
 
-exports.getAll = async function () {
-    const cubes = await Cube.find({}).populate('accessories').lean();
+exports.getAll = async function (query) {
+    const options = {};
+
+    if (query && query.search) {
+        options.name = new RegExp(query.search.toLocaleLowerCase(), 'i');
+    }
+
+    if (query && query.from) {
+        options.difficultyLevel = {
+            $gte: Number(query.from),
+        };
+    }
+
+    if (query && query.to) {
+        if (query.from) {
+            options.difficultyLevel = {
+                $gte: Number(query.from),
+                $lte: Number(query.to),
+            };
+        } else {
+            options.difficultyLevel = {
+                $lte: Number(query.to),
+            };
+        }
+    }
+
+    const cubes = await Cube.find(options).populate('accessories').lean();
     return cubes;
 };
 
