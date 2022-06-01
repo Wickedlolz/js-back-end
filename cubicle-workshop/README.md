@@ -6,7 +6,7 @@
 
 Document with requirments Part 1 [**here**](https://github.com/Wickedlolz/js-back-end/blob/main/03.%20Cubicle-Workshop-Part-1.docx) provided from [**SoftUni**](https://softuni.bg/)
 
-### Part 1
+## Part 1
 
 1.  Cube Model
 
@@ -40,9 +40,9 @@ Document with requirments Part 1 [**here**](https://github.com/Wickedlolz/js-bac
 
     If the search does NOT meet the requirements, just redirect to the home page **('/')**.
 
-### Part 2
+## Part 2
 
-## Main Task
+### Main Task
 
 Now it's time to upgrade your app and implement a few new features. For instance, replace the way you store data using MongoDB and Mongoose, create and attach new accessories to each cube, make some relations between them, and include a few more pages.
 
@@ -65,9 +65,66 @@ Document with requirments Part 2 [**here**](https://github.com/Wickedlolz/js-bac
 -   **Description** - (String, required, max length validation)
 -   **Cubes** - (ObjectId, ref Cubes Model)
 
-## Additional Pages
+### Additional Pages
 
 -   **/create/accessory** - should render the create an accessory form
 -   **/attach/accessory/:id** - should render the accessory page about attaching new accessory for cube
 
 And update the view on /details/:id route, that renders the cube's details.
+
+## Part 3
+
+### Main Task
+
+Now it's time to implement user service in your app, so people can register, login and logout. And each cube can be edited or deleted. Some of the functionality should require authentication such as (create a cube, create accessory) and authorization (such as edit and delete). Also, all routes should be protected
+
+### Model
+
+The User Model structure:
+
+-   **Id** - ObjectId
+-   **username** - string
+-   **password** - string **(hashed)** - User **bcrypt** to hash and compare the password
+
+### Routes Protection
+
+Make sure the anonymous (guest) users can't reach the functionality which requires authentication, such as creating a cube view. And already logged-in users have generated and stored jwt, can see the correct navigation, and can't reach the login and register form. If some of these scenarios happen, make sure the current user is redirected to the home page
+
+### Authentication
+
+Guest users can see and access the following URL:
+
+-   Home page (Browse)
+-   About page
+-   Login page
+-   Register page
+-   Cube details page
+
+And can't access and see everyone else...
+
+Logged in users can see and access the following URL:
+
+-   Home page (Browse)
+-   About page
+-   Add cube
+-   Add accessory
+-   Logout
+-   Cube details page
+-   Cube accessories page
+-   Edit cube page
+-   Delete cube page
+
+### Authorization
+
+Only authorized users should see the **[Edit]** and **[Delete]** buttons and if the currently logged-in user is the creator of this cube. Otherwise, they should be hidden.
+
+### Additional Pages
+
+You should implement 4 new routes:
+
+-   **/login** - should render the login form
+-   **/register** - should render the register form
+-   **/edit** – should render the edit form
+-   **/delete** – should render the delete form
+
+Make sure when you access /edit and /delete routes, they show the current cube information
