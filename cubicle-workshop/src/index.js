@@ -1,6 +1,4 @@
-const env = process.env.PORT || 'development';
-
-const config = require('./config/config')[env];
+const config = require('./config/config');
 const app = require('express')();
 
 init();
