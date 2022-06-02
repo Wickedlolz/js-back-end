@@ -5,6 +5,11 @@ exports.getAll = async function () {
     return accessories;
 };
 
+exports.getAllAvailable = async function (ids) {
+    const accessories = await Accessory.find({ _id: { $nin: ids } }).lean();
+    return accessories;
+};
+
 exports.create = async function (data) {
     const accessory = new Accessory({
         name: data.name,

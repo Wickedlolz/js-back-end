@@ -28,13 +28,9 @@ router.get('/attach/accessory/:id', async (req, res) => {
 
     try {
         const cube = await cubeService.getById(id);
-        let accessories = await accessoryService.getAll();
-
-        accessories = accessories.filter((a) => {
-            return Object.values(a.cubes).find((c) => c._id == id)
-                ? false
-                : true;
-        });
+        let accessories = await accessoryService.getAllAvailable(
+            cube.accessories
+        );
 
         res.render('attachAccessory', {
             title: 'Attach Accessory',
