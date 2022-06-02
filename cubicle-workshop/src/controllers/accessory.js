@@ -25,28 +25,41 @@ router.post('/create/accessory', async (req, res) => {
 
 router.get('/attach/accessory/:id', async (req, res) => {
     const { id } = req.params;
-    const cube = await cubeService.getById(id);
-    let accessories = await accessoryService.getAll();
 
-    accessories = accessories.filter((a) => {
-        return Object.values(a.cubes).find((c) => c._id == id) ? false : true;
-    });
+    try {
+        const cube = await cubeService.getById(id);
+        let accessories = await accessoryService.getAll();
 
-    res.render('attachAccessory', {
-        title: 'Attach Accessory',
-        cube,
-        accessories,
-    });
+        accessories = accessories.filter((a) => {
+            return Object.values(a.cubes).find((c) => c._id == id)
+                ? false
+                : true;
+        });
+
+        res.render('attachAccessory', {
+            title: 'Attach Accessory',
+            cube,
+            accessories,
+        });
+    } catch (error) {
+        console.error(error);
+        res.render('404');
+    }
 });
 
 router.post('/attach/accessory/:id', async (req, res) => {
     const { id } = req.params;
     const accessoryId = req.body.accessory;
 
-    await cubeService.addAccessoryToCube(id, accessoryId);
-    await accessoryService.addCubeToAccessory(accessoryId, id);
+    try {
+        await cubeService.addAccessoryToCube(id, accessoryId);
+        await accessoryService.addCubeToAccessory(accessoryId, id);
 
-    res.redirect('/');
+        res.redirect('/');
+    } catch (error) {
+        console.error(error);
+        res.render('404');
+    }
 });
 
 module.exports = router;
