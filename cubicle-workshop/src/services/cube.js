@@ -49,7 +49,7 @@ exports.getById = async function (id) {
     return cube;
 };
 
-exports.addAccessoryToCube = async function (cubeId, accessoryId) {
+exports.attach = async function (cubeId, accessoryId) {
     const cube = await Cube.findById(cubeId);
     cube.accessories.push(accessoryId);
 

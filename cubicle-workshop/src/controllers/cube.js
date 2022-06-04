@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 const cubeService = require('../services/cube');
+const accessoryService = require('../services/accessory');
 
 router.get('/create', (req, res) => {
     res.locals = {
@@ -38,6 +39,41 @@ router.get('/details/:id', async (req, res) => {
         };
 
         res.render('details');
+    } catch (error) {
+        console.error(error);
+        res.render('404');
+    }
+});
+
+router.get('/attach/accessory/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const cube = await cubeService.getById(id);
+        let accessories = await accessoryService.getAllAvailable(
+            cube.accessories
+        );
+
+        res.render('attachAccessory', {
+            title: 'Attach Accessory',
+            cube,
+            accessories,
+        });
+    } catch (error) {
+        console.error(error);
+        res.render('404');
+    }
+});
+
+router.post('/attach/accessory/:id', async (req, res) => {
+    const { id } = req.params;
+    const accessoryId = req.body.accessory;
+
+    try {
+        await cubeService.attach(id, accessoryId);
+        await accessoryService.attach(accessoryId, id);
+
+        res.redirect('/details/' + id);
     } catch (error) {
         console.error(error);
         res.render('404');

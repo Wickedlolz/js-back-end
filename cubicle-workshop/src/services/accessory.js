@@ -22,7 +22,7 @@ exports.create = async function (data) {
     return accessory;
 };
 
-exports.addCubeToAccessory = async function (accessoryId, cubeId) {
+exports.attach = async function (accessoryId, cubeId) {
     const accessory = await Accessory.findById(accessoryId);
     accessory.cubes.push(cubeId);
 
