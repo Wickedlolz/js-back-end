@@ -78,6 +78,12 @@ And update the view on /details/:id route, that renders the cube's details.
 
 Now it's time to implement user service in your app, so people can register, login and logout. And each cube can be edited or deleted. Some of the functionality should require authentication such as (create a cube, create accessory) and authorization (such as edit and delete). Also, all routes should be protected
 
+### Installing Dependencies
+
+1. jsonwebtoken - allows you to decode, verify and generate JWT
+2. bcrypt - a library to help you hash passwords
+3. cookie-parser - parse cookie header and populate req.cookies with an object keyed by the cookie names (if you choose to store the jwt as а cookie)
+
 ### Model
 
 The User Model structure:
