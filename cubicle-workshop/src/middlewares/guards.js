@@ -1,6 +1,6 @@
 exports.isUser = function () {
     return (req, res, next) => {
-        if (req.cookies.user) {
+        if (req.user) {
             next();
         } else {
             res.redirect('/');
@@ -10,7 +10,7 @@ exports.isUser = function () {
 
 exports.isGuest = function () {
     return (req, res, next) => {
-        if (req.cookies.user) {
+        if (req.user) {
             res.redirect('/');
         } else {
             next();

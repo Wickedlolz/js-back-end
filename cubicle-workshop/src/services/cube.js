@@ -68,3 +68,7 @@ exports.update = async function (cubeId, data) {
 
     return cube;
 };
+
+exports.delete = async function (cubeId) {
+    await Cube.findByIdAndDelete(cubeId);
+};
