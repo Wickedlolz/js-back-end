@@ -35,7 +35,7 @@ router.post('/register', async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-    res.render('loginPage', { title: 'Login ' });
+    res.render('loginPage', { title: 'Login' });
 });
 
 router.post('/login', async (req, res) => {

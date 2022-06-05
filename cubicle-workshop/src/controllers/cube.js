@@ -4,11 +4,7 @@ const cubeService = require('../services/cube');
 const accessoryService = require('../services/accessory');
 
 router.get('/create', (req, res) => {
-    res.locals = {
-        title: 'Create',
-    };
-
-    res.render('create');
+    res.render('create'), { title: 'Create' };
 });
 
 router.post('/create', async (req, res) => {
@@ -33,12 +29,7 @@ router.get('/details/:id', async (req, res) => {
     try {
         const cube = await cubeService.getById(id);
 
-        res.locals = {
-            title: cube.name,
-            cube,
-        };
-
-        res.render('details');
+        res.render('details', { title: cube.name, cube });
     } catch (error) {
         console.error(error);
         res.render('404');
