@@ -38,4 +38,20 @@ router.get('/login', (req, res) => {
     res.render('loginPage', { title: 'Login ' });
 });
 
+router.post('/login', async (req, res) => {
+    const data = {
+        username: req.body.username.trim(),
+        password: req.body.password.trim(),
+    };
+
+    try {
+        const token = await userService.login(data);
+        res.cookie('user', token);
+        res.redirect('/');
+    } catch (error) {
+        console.error(error);
+        res.render('loginPage', { title: 'Login' });
+    }
+});
+
 module.exports = router;

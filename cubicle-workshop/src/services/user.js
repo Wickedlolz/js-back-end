@@ -13,3 +13,24 @@ exports.register = async function (data) {
 
     await user.save();
 };
+
+exports.login = async function (data) {
+    const user = await User.findOne({ username: data.username });
+
+    if (!user) {
+        throw new Error('Invalid username');
+    }
+
+    const isIdentical = await bcrypt.compare(data.password, user.password);
+
+    if (!isIdentical) {
+        throw new Error('Invalid password');
+    }
+
+    const token = jwt.sign(
+        { username: user.username, id: user._id },
+        JWT_SECRET
+    );
+
+    return token;
+};
