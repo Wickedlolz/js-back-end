@@ -36,6 +36,7 @@ exports.create = async function (data) {
         description: data.description,
         imageUrl: data.imageUrl,
         difficultyLevel: data.difficultyLevel,
+        creatorId: data.creatorId,
     });
 
     await cube.save();

@@ -5,8 +5,6 @@ router.get('/', async (req, res) => {
     try {
         const cubes = await cubeService.getAll(req.query);
 
-        console.log(res.locals);
-
         res.render('index', {
             title: 'Browse',
             cubes,

@@ -4,7 +4,7 @@ const cubeService = require('../services/cube');
 const accessoryService = require('../services/accessory');
 
 router.get('/create', (req, res) => {
-    res.render('create'), { title: 'Create' };
+    res.render('create', { title: 'Create Cube' });
 });
 
 router.post('/create', async (req, res) => {
@@ -13,11 +13,12 @@ router.post('/create', async (req, res) => {
         description: req.body.description.trim(),
         imageUrl: req.body.imageUrl.trim(),
         difficultyLevel: req.body.difficultyLevel,
+        creatorId: res.locals.user.id,
     };
 
     try {
         const cube = await cubeService.create(data);
-        res.redirect('/');
+        res.redirect('/details/' + cube._id);
     } catch (error) {
         Object.values(error.errors).forEach((e) => console.log(e.message));
     }
