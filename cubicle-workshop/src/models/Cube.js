@@ -30,6 +30,10 @@ const cubeSchema = new Schema({
         type: [Types.ObjectId],
         ref: 'Accessory',
     },
+    creatorId: {
+        type: String,
+        required: true,
+    },
 });
 
 const Cube = model('Cube', cubeSchema);
