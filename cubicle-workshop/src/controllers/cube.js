@@ -3,11 +3,13 @@ const router = require('express').Router();
 const cubeService = require('../services/cube');
 const accessoryService = require('../services/accessory');
 
-router.get('/create', (req, res) => {
+const { isUser } = require('../middlewares/guards');
+
+router.get('/create', isUser(), (req, res) => {
     res.render('create', { title: 'Create Cube' });
 });
 
-router.post('/create', async (req, res) => {
+router.post('/create', isUser(), async (req, res) => {
     const data = {
         name: req.body.name.trim(),
         description: req.body.description.trim(),
@@ -29,8 +31,7 @@ router.get('/details/:id', async (req, res) => {
 
     try {
         const cube = await cubeService.getById(id);
-        const isAuthor = cube.creatorId == res.locals.user.id;
-        console.log(isAuthor);
+        const isAuthor = cube.creatorId == res.locals.user?.id;
 
         res.render('details', { title: cube.name, cube, isAuthor: isAuthor });
     } catch (error) {
@@ -39,7 +40,7 @@ router.get('/details/:id', async (req, res) => {
     }
 });
 
-router.get('/attach/accessory/:id', async (req, res) => {
+router.get('/attach/accessory/:id', isUser(), async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -59,7 +60,7 @@ router.get('/attach/accessory/:id', async (req, res) => {
     }
 });
 
-router.post('/attach/accessory/:id', async (req, res) => {
+router.post('/attach/accessory/:id', isUser(), async (req, res) => {
     const { id } = req.params;
     const accessoryId = req.body.accessory;
 
@@ -74,7 +75,7 @@ router.post('/attach/accessory/:id', async (req, res) => {
     }
 });
 
-router.get('/edit/:id', async (req, res) => {
+router.get('/edit/:id', isUser(), async (req, res) => {
     const cubeId = req.params.id;
     const cube = await cubeService.getById(cubeId);
     cube[`select${cube.difficultyLevel}`] = true;
@@ -82,7 +83,7 @@ router.get('/edit/:id', async (req, res) => {
     res.render('editCubePage', { title: `Edit - ${cube.name}`, cube });
 });
 
-router.post('/edit/:id', async (req, res) => {
+router.post('/edit/:id', isUser(), async (req, res) => {
     const cubeId = req.params.id;
 
     const data = {

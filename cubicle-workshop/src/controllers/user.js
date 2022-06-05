@@ -1,11 +1,13 @@
 const router = require('express').Router();
 const userService = require('../services/user');
 
-router.get('/register', (req, res) => {
+const { isGuest, isUser } = require('../middlewares/guards');
+
+router.get('/register', isGuest(), (req, res) => {
     res.render('registerPage', { title: 'Register' });
 });
 
-router.post('/register', async (req, res) => {
+router.post('/register', isGuest(), async (req, res) => {
     const data = {
         username: req.body.username.trim(),
         password: req.body.password.trim(),
@@ -34,11 +36,11 @@ router.post('/register', async (req, res) => {
     }
 });
 
-router.get('/login', (req, res) => {
+router.get('/login', isGuest(), (req, res) => {
     res.render('loginPage', { title: 'Login' });
 });
 
-router.post('/login', async (req, res) => {
+router.post('/login', isGuest(), async (req, res) => {
     const data = {
         username: req.body.username.trim(),
         password: req.body.password.trim(),
@@ -52,6 +54,11 @@ router.post('/login', async (req, res) => {
         console.error(error);
         res.render('loginPage', { title: 'Login' });
     }
+});
+
+router.get('/logout', isUser(), (req, res) => {
+    res.clearCookie('user');
+    res.redirect('/');
 });
 
 module.exports = router;
