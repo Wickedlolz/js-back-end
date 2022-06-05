@@ -55,3 +55,15 @@ exports.attach = async function (cubeId, accessoryId) {
 
     await cube.save();
 };
+
+exports.update = async function (cubeId, data) {
+    const cube = await Cube.findById(cubeId);
+    cube.name = data.name;
+    cube.description = data.description;
+    cube.imageUrl = data.imageUrl;
+    cube.difficultyLevel = data.difficultyLevel;
+
+    await cube.save();
+
+    return cube;
+};

@@ -88,6 +88,23 @@ router.get('/edit/:id', async (req, res) => {
     res.render('editCubePage', { title: `Edit - ${cube.name}`, cube });
 });
 
-router.post('/edit/:id', async (req, res) => {});
+router.post('/edit/:id', async (req, res) => {
+    const cubeId = req.params.id;
+
+    const data = {
+        name: req.body.name.trim(),
+        description: req.body.description.trim(),
+        imageUrl: req.body.imageUrl.trim(),
+        difficultyLevel: req.body.difficultyLevel,
+    };
+
+    try {
+        const cube = await cubeService.update(cubeId, data);
+        res.redirect('/details/' + cube._id);
+    } catch (error) {
+        console.error(error);
+        res.render('404');
+    }
+});
 
 module.exports = router;
