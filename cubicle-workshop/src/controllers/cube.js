@@ -29,8 +29,10 @@ router.get('/details/:id', async (req, res) => {
 
     try {
         const cube = await cubeService.getById(id);
+        const isAuthor = cube.creatorId == res.locals.user.id;
+        console.log(isAuthor);
 
-        res.render('details', { title: cube.name, cube });
+        res.render('details', { title: cube.name, cube, isAuthor: isAuthor });
     } catch (error) {
         console.error(error);
         res.render('404');
