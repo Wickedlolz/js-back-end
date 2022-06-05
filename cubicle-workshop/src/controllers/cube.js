@@ -83,8 +83,11 @@ router.post('/attach/accessory/:id', async (req, res) => {
 router.get('/edit/:id', async (req, res) => {
     const cubeId = req.params.id;
     const cube = await cubeService.getById(cubeId);
+    cube[`select${cube.difficultyLevel}`] = true;
 
     res.render('editCubePage', { title: `Edit - ${cube.name}`, cube });
 });
+
+router.post('/edit/:id', async (req, res) => {});
 
 module.exports = router;
