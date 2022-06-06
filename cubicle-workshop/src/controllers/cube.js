@@ -3,7 +3,7 @@ const router = require('express').Router();
 const cubeService = require('../services/cube');
 const accessoryService = require('../services/accessory');
 
-const { isUser } = require('../middlewares/guards');
+const { isUser, isCreator } = require('../middlewares/guards');
 
 router.get('/create', isUser(), (req, res) => {
     res.render('create', { title: 'Create Cube' });
@@ -23,6 +23,7 @@ router.post('/create', isUser(), async (req, res) => {
         res.redirect('/details/' + cube._id);
     } catch (error) {
         Object.values(error.errors).forEach((e) => console.log(e.message));
+        res.render('404');
     }
 });
 
@@ -40,7 +41,7 @@ router.get('/details/:id', async (req, res) => {
     }
 });
 
-router.get('/attach/accessory/:id', isUser(), async (req, res) => {
+router.get('/attach/accessory/:id', isUser(), isCreator(), async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -60,22 +61,27 @@ router.get('/attach/accessory/:id', isUser(), async (req, res) => {
     }
 });
 
-router.post('/attach/accessory/:id', isUser(), async (req, res) => {
-    const { id } = req.params;
-    const accessoryId = req.body.accessory;
+router.post(
+    '/attach/accessory/:id',
+    isUser(),
+    isCreator(),
+    async (req, res) => {
+        const { id } = req.params;
+        const accessoryId = req.body.accessory;
 
-    try {
-        await cubeService.attach(id, accessoryId);
-        await accessoryService.attach(accessoryId, id);
+        try {
+            await cubeService.attach(id, accessoryId);
+            await accessoryService.attach(accessoryId, id);
 
-        res.redirect('/details/' + id);
-    } catch (error) {
-        console.error(error);
-        res.render('404');
+            res.redirect('/details/' + id);
+        } catch (error) {
+            console.error(error);
+            res.render('404');
+        }
     }
-});
+);
 
-router.get('/edit/:id', isUser(), async (req, res) => {
+router.get('/edit/:id', isUser(), isCreator(), async (req, res) => {
     const cubeId = req.params.id;
     const cube = await cubeService.getById(cubeId);
     cube[`select${cube.difficultyLevel}`] = true;
@@ -83,7 +89,7 @@ router.get('/edit/:id', isUser(), async (req, res) => {
     res.render('editCubePage', { title: `Edit - ${cube.name}`, cube });
 });
 
-router.post('/edit/:id', isUser(), async (req, res) => {
+router.post('/edit/:id', isUser(), isCreator(), async (req, res) => {
     const cubeId = req.params.id;
 
     const data = {
@@ -102,7 +108,7 @@ router.post('/edit/:id', isUser(), async (req, res) => {
     }
 });
 
-router.get('/delete/:id', isUser(), async (req, res) => {
+router.get('/delete/:id', isUser(), isCreator(), async (req, res) => {
     const cubeId = req.params.id;
 
     try {
@@ -116,7 +122,7 @@ router.get('/delete/:id', isUser(), async (req, res) => {
     }
 });
 
-router.post('/delete/:id', isUser(), async (req, res) => {
+router.post('/delete/:id', isUser(), isCreator(), async (req, res) => {
     const cubeId = req.params.id;
 
     try {
