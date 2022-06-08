@@ -4,7 +4,7 @@
 
 ## Requirments
 
-Document with requirments Part 1 [**here**](https://github.com/Wickedlolz/js-back-end/blob/main/03.%20Cubicle-Workshop-Part-1.docx) provided from [**SoftUni**](https://softuni.bg/)
+Document with requirments Part 1 [**here**](https://github.com/Wickedlolz/js-back-end/blob/main/resources/03.%20Cubicle-Workshop-Part-1.docx) provided from [**SoftUni**](https://softuni.bg/)
 
 ## Part 1
 
@@ -46,7 +46,7 @@ Document with requirments Part 1 [**here**](https://github.com/Wickedlolz/js-bac
 
 Now it's time to upgrade your app and implement a few new features. For instance, replace the way you store data using MongoDB and Mongoose, create and attach new accessories to each cube, make some relations between them, and include a few more pages.
 
-Document with requirments Part 2 [**here**](https://github.com/Wickedlolz/js-back-end/blob/main/04.%20Cubicle-Workshop-Part-2.docx) provided from [**SoftUni**](https://softuni.bg/)
+Document with requirments Part 2 [**here**](https://github.com/Wickedlolz/js-back-end/blob/main/resources/04.%20Cubicle-Workshop-Part-2.docx) provided from [**SoftUni**](https://softuni.bg/)
 
 ### Cube Mongoose Model
 
@@ -78,7 +78,7 @@ And update the view on /details/:id route, that renders the cube's details.
 
 Now it's time to implement user service in your app, so people can register, login and logout. And each cube can be edited or deleted. Some of the functionality should require authentication such as (create a cube, create accessory) and authorization (such as edit and delete). Also, all routes should be protected.
 
-Document with requirments Part 3 [**here**](https://github.com/Wickedlolz/js-back-end/blob/main/05.%20Cubicle-Workshop-Part-3.docx) provided from [**SoftUni**](https://softuni.bg/)
+Document with requirments Part 3 [**here**](https://github.com/Wickedlolz/js-back-end/blob/main/resources/05.%20Cubicle-Workshop-Part-3.docx) provided from [**SoftUni**](https://softuni.bg/)
 
 ### Installing Dependencies
 
