@@ -27,10 +27,19 @@ exports.login = async function (data) {
         throw new Error('Invalid password');
     }
 
-    const token = jwt.sign(
-        { username: user.username, id: user._id },
-        JWT_SECRET
-    );
+    const token = new Promise((resolve, reject) => {
+        jwt.sign(
+            { username: user.username, id: user._id },
+            JWT_SECRET,
+            (err, token) => {
+                if (err) {
+                    return reject(err);
+                }
+
+                resolve(token);
+            }
+        );
+    });
 
     return token;
 };
