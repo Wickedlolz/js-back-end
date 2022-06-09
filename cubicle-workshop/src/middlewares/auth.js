@@ -8,7 +8,7 @@ module.exports = function () {
         if (token) {
             jwt.verify(token, JWT_SECRET, function (err, decoded) {
                 if (err) {
-                    res.clearCookir('user');
+                    res.clearCookie('user');
                 } else {
                     req.user = decoded;
                     res.locals.user = decoded;
