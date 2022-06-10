@@ -136,3 +136,46 @@ You should implement 4 new routes:
 -   **/delete** – should render the delete form
 
 Make sure when you access /edit and /delete routes, they show the current cube information
+
+## Part 4
+
+### Main Task
+
+As a final step, you should implement some validation, notification to improve the user experience and protect the data that is stored in the database.
+
+Document with requirments Part 4 [**here**](https://github.com/Wickedlolz/js-back-end/blob/main/resources/06.%20Cubicle-Workshop-Part-4.docx) provided from [**SoftUni**](https://softuni.bg/)
+
+### Installing Dependencies
+
+You can use **express-validator** to do some **validation** and **sanitization** or continue using Mongoose to do validations as well.
+
+### Validations
+
+### User
+
+-   **Username**
+    -   Should be **unique** (add "**unique: true**" property to each User Model username)
+    -   Should consist only of English letters and digits
+    -   Should be at least 5 characters long
+-   **Password**
+    -   Should consist only of English letters and digits
+    -   Should be at least 8 characters long
+-   **Re-Password**
+    -   Should be the same as the given password
+
+### Cube and Accessory
+
+-   **Name**
+    -   At least 5 characters long, who could be English letters, digits, and whitespaces
+-   **Description**
+    -   At least 20 characters, who could be English letters, digits, and whitespace
+-   **Image URL**
+    -   Referring to actual picture (starts with http://... or https://...)
+
+### Error Handling
+
+In case of errors, for instance, If the given username is **already taken, does not exist** or the given **password** (while login) is incorrect, handle the error properly and show an appropriate notification.
+
+### Template Update
+
+Create a div with id="notifications", between the header and the main element, which holds a single paragraph with id="notification-message".
