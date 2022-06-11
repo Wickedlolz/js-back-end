@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const userService = require('../services/user');
 
+const { body, validationResult } = require('express-validator');
 const { isGuest, isUser } = require('../middlewares/guards');
 
 router.get('/register', isGuest(), (req, res) => {
