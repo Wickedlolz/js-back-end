@@ -68,7 +68,7 @@ router.post(
             res.redirect('/details/' + cube._id);
         } catch (error) {
             const errors = mapErrors(error);
-            res.render('create', { errors, data });
+            res.render('create', { title: 'Create Cube', errors, data });
         }
     }
 );
