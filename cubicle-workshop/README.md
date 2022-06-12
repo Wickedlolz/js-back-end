@@ -179,3 +179,10 @@ In case of errors, for instance, If the given username is **already taken, does 
 ### Template Update
 
 Create a div with id="notifications", between the header and the main element, which holds a single paragraph with id="notification-message".
+
+## Live Demo - [**here**](https://cubicle-workshop.herokuapp.com/)
+
+Login as:
+
+-   username: peter
+-   password: 12345678
