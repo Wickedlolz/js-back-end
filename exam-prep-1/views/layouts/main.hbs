@@ -1,0 +1,19 @@
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8' />
+        <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <title>Document</title>
+    </head>
+    <body>
+        {{#if errors}}
+            <div>
+                {{#each errors}}
+                    <p style='color: red;'>{{msg}}</p>
+                {{/each}}
+            </div>
+        {{/if}}
+        <h2>Welcome {{user.username}}</h2>
+        {{{body}}}
+    </body>
+</html>
