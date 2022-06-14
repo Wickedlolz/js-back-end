@@ -5,8 +5,9 @@ const { isGuest, isUser } = require('../middlewares/guards');
 const { body, validationResult } = require('express-validator');
 const { mapErrors } = require('../utils/mapErrors');
 
-router.get('/', (req, res) => {
-    res.render('gallery');
+router.get('/', async (req, res) => {
+    const publications = await galleryService.getAll().lean();
+    res.render('gallery', { publications });
 });
 
 router.get('/create', isUser(), (req, res) => {
