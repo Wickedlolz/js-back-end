@@ -13,6 +13,16 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    adress: {
+        type: String,
+        required: true,
+    },
+    myPublication: [
+        {
+            type: ObjectId,
+            ref: 'User',
+        },
+    ],
 });
 
 userSchema.index(

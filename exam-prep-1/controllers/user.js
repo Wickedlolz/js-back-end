@@ -104,6 +104,9 @@ router.post(
     }
 );
 
-router.get('/logout', isUser(), (req, res) => {});
+router.get('/logout', isUser(), (req, res) => {
+    res.clearCookie('user');
+    res.redirect('/');
+});
 
 module.exports = router;
