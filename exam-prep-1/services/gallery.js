@@ -23,3 +23,7 @@ exports.update = async function (publicationId, data) {
     );
     return publication;
 };
+
+exports.deleteById = async function (publicationId) {
+    await Publication.findByIdAndDelete(publicationId);
+};

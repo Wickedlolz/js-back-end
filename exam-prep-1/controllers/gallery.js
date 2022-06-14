@@ -165,4 +165,11 @@ router.post(
     }
 );
 
+router.get('/delete/:id', isCreator(), async (req, res) => {
+    const publicationId = req.params.id;
+    await galleryService.deleteById(publicationId);
+
+    res.redirect('/gallery');
+});
+
 module.exports = router;
