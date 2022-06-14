@@ -33,8 +33,12 @@ router.post(
         .withMessage('Re-Password is required!')
         .bail()
         .custom((value, { req }) => value == req.body.password)
-        .withMessage('Passwords not match!'),
-    body('adress').notEmpty().withMessage('Adress is required!'),
+        .withMessage('The repeat password should be equal to the password.'),
+    body('adress')
+        .notEmpty()
+        .withMessage('Adress is required!')
+        .isLength({ max: 20 })
+        .withMessage('The address should be a maximum of 20 characters long'),
     async (req, res) => {
         const { errors } = validationResult(req);
 
