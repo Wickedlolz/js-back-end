@@ -62,6 +62,15 @@ exports.login = async function (username, password) {
     return token;
 };
 
+exports.addToMyPublication = async function (userId, publicationId) {
+    const user = await User.findById(userId);
+    user.myPublication.push(publicationId);
+
+    await user.save();
+
+    return user;
+};
+
 async function getUserByUsername(username) {
     const user = await User.findOne({
         username: new RegExp(`^${username}$`, 'i'),

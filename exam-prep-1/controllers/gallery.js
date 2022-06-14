@@ -79,6 +79,7 @@ router.get('/details/:id', async (req, res) => {
     const publication = await galleryService
         .getById(publicationId)
         .populate('author')
+        .populate('usersShared')
         .lean();
 
     if (!publication) {
@@ -86,8 +87,14 @@ router.get('/details/:id', async (req, res) => {
     }
 
     const isAuthor = publication.author._id == res.locals.user?.id;
+    const canShare = publication.usersShared.find(
+        (u) => u._id == res.locals.user?.id
+    )
+        ? false
+        : true;
+    console.log(publication);
 
-    res.render('details', { publication, isAuthor });
+    res.render('details', { publication, isAuthor, canShare });
 });
 
 router.get('/edit/:id', isCreator(), async (req, res) => {
@@ -170,6 +177,19 @@ router.get('/delete/:id', isCreator(), async (req, res) => {
     await galleryService.deleteById(publicationId);
 
     res.redirect('/gallery');
+});
+
+router.get('/share/:id', isUser(), async (req, res) => {
+    const publicationId = req.params.id;
+    const userId = res.locals.user.id;
+
+    try {
+        const publication = await galleryService.share(publicationId, userId);
+        res.redirect('/gallery/details/' + publication._id);
+    } catch (error) {
+        const errors = [{ msg: error.message }];
+        res.render('404', { errors });
+    }
 });
 
 module.exports = router;
