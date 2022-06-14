@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const galleryService = require('../services/gallery');
-const { isGuest, isUser } = require('../middlewares/guards');
+const { isGuest, isUser, isCreator } = require('../middlewares/guards');
 const { body, validationResult } = require('express-validator');
 const { mapErrors } = require('../utils/mapErrors');
 
@@ -89,5 +89,7 @@ router.get('/details/:id', async (req, res) => {
 
     res.render('details', { publication, isAuthor });
 });
+
+router.get('/edit/:id', isCreator(), async (req, res) => {});
 
 module.exports = router;
