@@ -10,23 +10,32 @@
         <div id='box'>
             <!-- In case of error, you should display div with class "error-box" -->
             <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
-            <!--<div class="error-box">
-            <p>Error</p>
-        </div>-->
+            {{#if errors}}
+                <div class='error-box'>
+                    {{#each errors}}
+                        <p>{{msg}}</p>
+                    {{/each}}
+                </div>
+            {{/if}}
             <nav>
                 <!-- Do not forget to change the path to the image -->
                 <img src='/static/img/art-logo.png' alt='logo' />
-                <a href='#'>ArtGallery</a>
+                <a href='/'>ArtGallery</a>
 
                 <ul class='menu'>
-                    <li><a href='#'>Gallery</a></li>
+                    <li><a href='/gallery'>Gallery</a></li>
                     <!-- Logged users -->
-                    <li><a href='#'>Create Publication</a></li>
-                    <li><a href='#'>Profile</a></li>
-                    <li><a href='#'>Logout</a></li>
-                    <!-- Guest users -->
-                    <li><a href='#'>Login</a></li>
-                    <li><a href='#'>Register</a></li>
+                    {{#if hasUser}}
+                        <li><a href='/gallery/create'>Create Publication</a></li>
+                        <li><a
+                                href='/users/profile/{{user.id}}'
+                            >Profile</a></li>
+                        <li><a href='/users/logout'>Logout</a></li>
+                    {{else}}
+                        <!-- Guest users -->
+                        <li><a href='/users/login'>Login</a></li>
+                        <li><a href='/users/register'>Register</a></li>
+                    {{/if}}
                 </ul>
             </nav>
             <main>
