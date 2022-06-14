@@ -73,7 +73,7 @@ router.post(
     isGuest(),
     body('username').trim(),
     body('password').trim(),
-    body('usernamem')
+    body('username')
         .notEmpty()
         .withMessage('Username is required!')
         .bail()
