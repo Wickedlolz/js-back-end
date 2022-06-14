@@ -3,22 +3,33 @@
         <!-- Do not forget to change the path to the image -->
         <img src='/static/img/slider.jpg' alt='image' />
 
-        <form action='#' method='' class='container-text'>
+        <form action='/users/register' method='post' class='container-text'>
             <h2>Register</h2>
             <p>Register to get ideas and view the latest masterpieces.</p>
 
             <label for='username'>Username:</label>
-            <input type='text' id='username' placeholder='ivan_00' name='' />
+            <input
+                type='text'
+                id='username'
+                placeholder='ivan_00'
+                name='username'
+                value='{{data.username}}'
+            />
 
             <label for='password'>Password:</label>
-            <input type='password' id='password' placeholder='*****' name='' />
+            <input
+                type='password'
+                id='password'
+                placeholder='*****'
+                name='password'
+            />
 
             <label for='re-password'>Repeat password:</label>
             <input
                 type='password'
                 id='re-password'
                 placeholder='*****'
-                name=''
+                name='rePassword'
             />
 
             <label for='address'>Address:</label>
@@ -26,12 +37,14 @@
                 type='text'
                 id='address'
                 placeholder='2572 Orphan Road'
-                name=''
+                name='adress'
+                value='{{data.adress}}'
             />
 
             <button class='register-btn'>Register</button>
             <div class='card-no-account'>
-                <p>Already have an account?<a href='#'> Sign in</a></p>
+                <p>Already have an account?<a href='/users/login'>
+                        Sign in</a></p>
             </div>
         </form>
     </div>

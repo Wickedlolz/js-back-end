@@ -15,6 +15,7 @@ router.post(
     body('username').trim(),
     body('password').trim(),
     body('rePassword').trim(),
+    body('adress').trim(),
     body('username')
         .notEmpty()
         .withMessage('Username is required!')
@@ -33,12 +34,14 @@ router.post(
         .bail()
         .custom((value, { req }) => value == req.body.password)
         .withMessage('Passwords not match!'),
+    body('adress').notEmpty().withMessage('Adress is required!'),
     async (req, res) => {
         const { errors } = validationResult(req);
 
         const data = {
             username: req.body.username,
             password: req.body.password,
+            adress: req.body.adress,
         };
 
         try {
@@ -48,7 +51,8 @@ router.post(
 
             const token = await userService.register(
                 data.username,
-                data.password
+                data.password,
+                data.adress
             );
 
             res.cookie('user', token);

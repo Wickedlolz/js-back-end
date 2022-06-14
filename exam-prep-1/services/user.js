@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const { hash, compare } = require('bcrypt');
 const { config } = require('../config/config');
 
-exports.register = async function (username, password) {
+exports.register = async function (username, password, adress) {
     const existing = await getUserByUsername(username);
 
     if (existing) {
@@ -11,13 +11,13 @@ exports.register = async function (username, password) {
     }
 
     const hashedPassword = await hash(password, config.SALT_ROUNDS);
-    const user = new User({ username, password: hashedPassword });
+    const user = new User({ username, password: hashedPassword, adress });
 
     await user.save();
 
     const token = new Promise((resolve, reject) => {
         jwt.sign(
-            { username: user.username, id: user._id },
+            { username: user.username, id: user._id, adress: user.adress },
             config.JWT_SECRET,
             (error, token) => {
                 if (error) {
@@ -47,7 +47,7 @@ exports.login = async function (username, password) {
 
     const token = new Promise((resolve, reject) => {
         jwt.sign(
-            { username: user.username, id: user._id },
+            { username: user.username, id: user._id, adress: user.adress },
             config.JWT_SECRET,
             (error, token) => {
                 if (error) {
