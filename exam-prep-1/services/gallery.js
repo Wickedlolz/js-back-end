@@ -15,3 +15,11 @@ exports.create = async function (publicationData) {
 
     return publication;
 };
+
+exports.update = async function (publicationId, data) {
+    const publication = await Publication.findByIdAndUpdate(
+        publicationId,
+        data
+    );
+    return publication;
+};

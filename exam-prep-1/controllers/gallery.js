@@ -90,6 +90,79 @@ router.get('/details/:id', async (req, res) => {
     res.render('details', { publication, isAuthor });
 });
 
-router.get('/edit/:id', isCreator(), async (req, res) => {});
+router.get('/edit/:id', isCreator(), async (req, res) => {
+    const publicationId = req.params.id;
+    const publication = await galleryService.getById(publicationId).lean();
+
+    if (!publication) {
+        res.redirect('/404');
+    }
+
+    res.render('edit', { publication });
+});
+
+router.post(
+    '/edit/:id',
+    isCreator(),
+    body('title').trim(),
+    body('paintingTechnique').trim(),
+    body('picture').trim(),
+    body('certificate').trim(),
+    body('title')
+        .notEmpty()
+        .withMessage('Title is required!')
+        .bail()
+        .isLength({ min: 6 })
+        .withMessage('The Title should be a minimum of 6 characters long.'),
+    body('paintingTechnique')
+        .notEmpty()
+        .withMessage('Painting Technique is required!')
+        .bail()
+        .isLength({ max: 15 })
+        .withMessage(
+            'The Painting technique should be a maximum of 15 characters long.'
+        ),
+    body('certificate')
+        .notEmpty()
+        .withMessage('Certificate is required!')
+        .bail()
+        .custom((value) => value == 'Yes' || value == 'No')
+        .withMessage('Certificate must be Yes or No !'),
+    body('picture')
+        .notEmpty()
+        .withMessage('Picture is required!')
+        .bail()
+        .custom(
+            (value) => value.startsWith('http') || value.startsWith('https')
+        )
+        .withMessage('Invalid picture!'),
+    async (req, res) => {
+        const { errors } = validationResult(req);
+        const publicationId = req.params.id;
+
+        const data = {
+            title: req.body.title,
+            paintingTechnique: req.body.paintingTechnique,
+            picture: req.body.picture,
+            certificate: req.body.certificate,
+        };
+
+        try {
+            if (errors.length > 0) {
+                throw errors;
+            }
+
+            const publication = await galleryService.update(
+                publicationId,
+                data
+            );
+            res.redirect('/gallery/details/' + publication._id);
+        } catch (error) {
+            const errors = mapErrors(error);
+            data._id = publicationId;
+            res.render('edit', { errors, publication: data });
+        }
+    }
+);
 
 module.exports = router;
