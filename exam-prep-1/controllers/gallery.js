@@ -74,4 +74,20 @@ router.post(
     }
 );
 
+router.get('/details/:id', async (req, res) => {
+    const publicationId = req.params.id;
+    const publication = await galleryService
+        .getById(publicationId)
+        .populate('author')
+        .lean();
+
+    if (!publication) {
+        res.redirect('/404');
+    }
+
+    const isAuthor = publication.author._id == res.locals.user?.id;
+
+    res.render('details', { publication, isAuthor });
+});
+
 module.exports = router;
