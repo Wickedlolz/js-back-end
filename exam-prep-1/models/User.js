@@ -20,7 +20,7 @@ const userSchema = new Schema({
     myPublication: [
         {
             type: ObjectId,
-            ref: 'User',
+            ref: 'Publication',
         },
     ],
 });

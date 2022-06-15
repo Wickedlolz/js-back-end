@@ -53,11 +53,13 @@ router.post(
                 throw errors;
             }
 
-            const token = await userService.register(
+            const user = await userService.register(
                 data.username,
                 data.password,
                 data.adress
             );
+
+            const token = await userService.createToken(user);
 
             res.cookie('user', token);
             res.redirect('/');
@@ -102,7 +104,8 @@ router.post(
                 throw errors;
             }
 
-            const token = await userService.login(data.username, data.password);
+            const user = await userService.login(data.username, data.password);
+            const token = await userService.createToken(user);
             res.cookie('user', token);
             res.redirect('/');
         } catch (error) {
@@ -115,6 +118,21 @@ router.post(
 router.get('/logout', isUser(), (req, res) => {
     res.clearCookie('user');
     res.redirect('/');
+});
+
+router.get('/profile/:id', isUser(), async (req, res) => {
+    const userId = req.params.id;
+    const user = await userService
+        .getById(userId)
+        .populate('myPublication')
+        .lean();
+
+    user.myPublicationTitles = user.myPublication
+        .map((p) => p.title)
+        .join(', ');
+
+    // TODO: viktor: show current user shared publicaiton title separated with ", "
+    res.render('profile', { user });
 });
 
 module.exports = router;

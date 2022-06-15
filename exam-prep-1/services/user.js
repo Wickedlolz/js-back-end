@@ -15,21 +15,7 @@ exports.register = async function (username, password, adress) {
 
     await user.save();
 
-    const token = new Promise((resolve, reject) => {
-        jwt.sign(
-            { username: user.username, id: user._id, adress: user.adress },
-            config.JWT_SECRET,
-            (error, token) => {
-                if (error) {
-                    return reject(error);
-                }
-
-                resolve(token);
-            }
-        );
-    });
-
-    return token;
+    return user;
 };
 
 exports.login = async function (username, password) {
@@ -45,7 +31,24 @@ exports.login = async function (username, password) {
         throw new Error('Incorect Password');
     }
 
-    const token = new Promise((resolve, reject) => {
+    return user;
+};
+
+exports.addToMyPublication = async function (userId, publicationId) {
+    const user = await User.findById(userId);
+    user.myPublication.push(publicationId);
+
+    await user.save();
+
+    return user;
+};
+
+exports.getById = function (userId) {
+    return User.findById(userId);
+};
+
+exports.createToken = function (user) {
+    const tokenPromise = new Promise((resolve, reject) => {
         jwt.sign(
             { username: user.username, id: user._id, adress: user.adress },
             config.JWT_SECRET,
@@ -59,16 +62,7 @@ exports.login = async function (username, password) {
         );
     });
 
-    return token;
-};
-
-exports.addToMyPublication = async function (userId, publicationId) {
-    const user = await User.findById(userId);
-    user.myPublication.push(publicationId);
-
-    await user.save();
-
-    return user;
+    return tokenPromise;
 };
 
 async function getUserByUsername(username) {
