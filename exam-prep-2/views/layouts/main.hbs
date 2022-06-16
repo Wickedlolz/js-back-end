@@ -27,13 +27,16 @@
                 <ul>
                     <!-- Guest users and Logged users -->
                     <li><a href='#'>Housing for rent</a></li>
-                    <!-- Guest users -->
-                    <li><a href='/users/login'>Login</a></li>
-                    <li><a href='/users/register'>Register</a></li>
-                    <!-- Logged users -->
-                    <li><a href='#'>Create offer</a></li>
-                    <li><a href='/search'>Search</a></li>
-                    <li><a href='/users/logout'>Logout</a></li>
+                    {{#if hasUser}}
+                        <!-- Logged users -->
+                        <li><a href='#'>Create offer</a></li>
+                        <li><a href='/search'>Search</a></li>
+                        <li><a href='/users/logout'>Logout</a></li>
+                    {{else}}
+                        <!-- Guest users -->
+                        <li><a href='/users/login'>Login</a></li>
+                        <li><a href='/users/register'>Register</a></li>
+                    {{/if}}
                 </ul>
             </nav>
             <main>
