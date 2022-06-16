@@ -12,6 +12,7 @@ router.get('/register', isGuest(), (req, res) => {
 router.post(
     '/register',
     isGuest(),
+    body('name').trim(),
     body('username').trim(),
     body('password').trim(),
     body('rePassword').trim(),
@@ -37,6 +38,7 @@ router.post(
         const { errors } = validationResult(req);
 
         const data = {
+            name: req.body.name,
             username: req.body.username,
             password: req.body.password,
         };
@@ -47,6 +49,7 @@ router.post(
             }
 
             const user = await userService.register(
+                data.name,
                 data.username,
                 data.password
             );

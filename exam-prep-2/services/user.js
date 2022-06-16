@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const { hash, compare } = require('bcrypt');
 const { config } = require('../config/config');
 
-exports.register = async function (username, password) {
+exports.register = async function (name, username, password) {
     const existing = await getUserByUsername(username);
 
     if (existing) {
@@ -11,7 +11,7 @@ exports.register = async function (username, password) {
     }
 
     const hashedPassword = await hash(password, config.SALT_ROUNDS);
-    const user = new User({ username, password: hashedPassword });
+    const user = new User({ name, username, password: hashedPassword });
 
     await user.save();
 

@@ -1,36 +1,36 @@
-<section id="login-page">
-    <div class="boxs">
-        <div class="card-image">
-            <h2 class="card-heading">Login</h2>
+<section id='login-page'>
+    <div class='boxs'>
+        <div class='card-image'>
+            <h2 class='card-heading'>Login</h2>
         </div>
-        <form class="card-form" action="" method="">
-            <div class="input">
+        <form class='card-form' action='/users/login' method='POST'>
+            <div class='input'>
                 <input
-                    type="text"
-                    class="input-field"
-                    placeholder="alexander"
-                    id="username"
-                    name=""
-                    value=""
+                    type='text'
+                    class='input-field'
+                    placeholder='alexander'
+                    id='username'
+                    name='username'
+                    value='{{data.username}}'
                 />
-                <label class="username">Username</label>
+                <label class='username'>Username</label>
             </div>
-            <div class="input">
+            <div class='input'>
                 <input
-                    type="password"
-                    class="input-field"
-                    id="password"
-                    name=""
-                    placeholder="******"
+                    type='password'
+                    class='input-field'
+                    id='password'
+                    name='password'
+                    placeholder='******'
                 />
-                <label class="password">Password</label>
+                <label class='password'>Password</label>
             </div>
-            <div class="action">
-                <button class="action-button">Login</button>
+            <div class='action'>
+                <button class='action-button'>Login</button>
             </div>
         </form>
-        <div class="card-info">
-            <p>Dont have an account? <a href="#">Sign up</a>.</p>
+        <div class='card-info'>
+            <p>Dont have an account? <a href='/users/register'>Sign up</a>.</p>
         </div>
     </div>
 </section>
