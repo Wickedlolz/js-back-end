@@ -26,11 +26,11 @@
                     <!-- Only for registered user and creator of the housing offer-->
                     {{#if isAuthor}}
                         <a
-                            href='/housing/edit/{{house._id}}'
+                            href='/houses/edit/{{house._id}}'
                             class='edit'
                         >Edit</a>
                         <a
-                            href='/housing/delete/{{house._id}}'
+                            href='/houses/delete/{{house._id}}'
                             class='remove'
                         >Delete</a>
                     {{else}}

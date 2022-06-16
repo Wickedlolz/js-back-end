@@ -15,3 +15,9 @@ exports.create = async function (houseData) {
 exports.getById = function (houseId) {
     return Housing.findById(houseId);
 };
+
+exports.update = async function (houseId, data) {
+    const house = await Housing.findByIdAndUpdate(houseId, data);
+
+    return house;
+};

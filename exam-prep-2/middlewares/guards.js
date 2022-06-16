@@ -1,4 +1,4 @@
-const { getById } = require('../services/housing');
+const { getById } = require('../services/house');
 
 exports.isUser = function () {
     return (req, res, next) => {
