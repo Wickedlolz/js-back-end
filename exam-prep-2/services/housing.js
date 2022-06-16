@@ -7,3 +7,7 @@ exports.create = async function (houseData) {
 
     return house;
 };
+
+exports.getById = function (houseId) {
+    return Housing.findById(houseId);
+};

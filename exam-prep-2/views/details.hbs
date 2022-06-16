@@ -1,19 +1,16 @@
-<section id="deatils-page">
-    <div class="wrapper">
-        <div class="product-img">
-            <img src="./static/images/apartments.jpg" />
+<section id='deatils-page'>
+    <div class='wrapper'>
+        <div class='product-img'>
+            <img src='{{house.image}}' />
         </div>
-        <div class="product-info">
-            <div class="product-text">
-                <div class="product-text">
-                    <h1>Name: Sunhouse C21</h1>
-                    <h2>Type: Apartment</h2>
-                    <h4>Year: 2021</h4>
-                    <h4>City: Sofia</h4>
-                    <p>
-                        Description: Spacious dining room, remodel kitchen and
-                        wonderful deeded walk-out deck.
-                    </p>
+        <div class='product-info'>
+            <div class='product-text'>
+                <div class='product-text'>
+                    <h1>Name: {{house.name}}</h1>
+                    <h2>Type: {{house.type}}</h2>
+                    <h4>Year: {{house.year}}</h4>
+                    <h4>City: {{house.city}}</h4>
+                    <p>{{house.description}}</p>
 
                     <!-- if there are already tenants of the housing, separate their names with a comma and a space ", "  -->
                     <p>People rented this housing: Alex Petkov, Ivan Dobrev</p>
@@ -24,19 +21,20 @@
             </div>
 
             <!-- if there is no registered user, do not display buttons-->
-            <div class="product-btn">
+            <div class='product-btn'>
                 <!-- Only for registered user and creator of the housing offer-->
-                <a href="#" class="edit">Edit</a>
-                <a href="#" class="remove">Delete</a>
+                <a href='/housing/edit/{{house._id}}' class='edit'>Edit</a>
+                <a
+                    href='/housing/delete/{{house._id}}'
+                    class='remove'
+                >Delete</a>
 
                 <!-- logged in user with available pieces-->
-                <a href="#" class="rentHome"
-                    >Rent a home, available 2 housing</a
-                >
-                <p class="alRentHome">You have already rent this home</p>
+                <a href='#' class='rentHome'>Rent a home, available 2 housing</a>
+                <p class='alRentHome'>You have already rent this home</p>
 
                 <!-- logged in user with no available pieces-->
-                <p class="no-housing">No Housing Available!</p>
+                <p class='no-housing'>No Housing Available!</p>
             </div>
         </div>
     </div>

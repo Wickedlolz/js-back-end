@@ -91,7 +91,7 @@ router.post(
                 throw errors;
             }
 
-            const house = await housingService.create(data);
+            await housingService.create(data);
             res.redirect('/housing/rent');
         } catch (error) {
             const errors = mapErrors(error);
@@ -99,5 +99,17 @@ router.post(
         }
     }
 );
+
+router.get('/details/:id', async (req, res) => {
+    const houseId = req.params.id;
+
+    try {
+        const house = await housingService.getById(houseId);
+        res.render('details', { house });
+    } catch (error) {
+        const errors = mapErrors(error);
+        res.render('404', { errors });
+    }
+});
 
 module.exports = router;
