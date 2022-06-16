@@ -1,4 +1,4 @@
-const dbName = 'testdb';
+const dbName = 'real-estate-agancy';
 
 exports.config = {
     port: process.env.PORT || 3000,
