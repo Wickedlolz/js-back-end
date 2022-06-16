@@ -1,11 +1,12 @@
 const router = require('express').Router();
-const { isGuest, isUser } = require('../middlewares/guards');
+const { isGuest, isUser, isCreator } = require('../middlewares/guards');
 const housingService = require('../services/housing');
 const { body, validationResult } = require('express-validator');
 const { mapErrors } = require('../utils/mapErrors');
 
-router.get('/rent', (req, res) => {
-    res.render('aprt-for-recent');
+router.get('/rent', async (req, res) => {
+    const houses = await housingService.getAll().lean();
+    res.render('aprt-for-recent', { houses });
 });
 
 router.get('/create', isUser(), (req, res) => {
@@ -104,12 +105,20 @@ router.get('/details/:id', async (req, res) => {
     const houseId = req.params.id;
 
     try {
-        const house = await housingService.getById(houseId);
-        res.render('details', { house });
+        const house = await housingService.getById(houseId).lean();
+        const isAuthor = house.owner == req.user.id;
+        res.render('details', { house, isAuthor });
     } catch (error) {
         const errors = mapErrors(error);
         res.render('404', { errors });
     }
+});
+
+router.get('/edit/:id', isUser(), isCreator(), async (req, res) => {
+    const houseId = req.params.id;
+    const house = await housingService.getById(houseId).lean();
+
+    res.render('edit', { house });
 });
 
 module.exports = router;
