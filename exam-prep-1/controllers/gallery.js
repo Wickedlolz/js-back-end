@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 const galleryService = require('../services/gallery');
+const userService = require('../services/user');
 const { isGuest, isUser, isCreator } = require('../middlewares/guards');
 const { body, validationResult } = require('express-validator');
 const { mapErrors } = require('../utils/mapErrors');
@@ -65,7 +66,11 @@ router.post(
                 throw errors;
             }
 
-            await galleryService.create(data);
+            const publication = await galleryService.create(data);
+            await userService.addToMyPublication(
+                res.locals.user.id,
+                publication._id
+            );
             res.redirect('/gallery');
         } catch (error) {
             const errors = mapErrors(error);
@@ -188,6 +193,7 @@ router.get('/share/:id', isUser(), async (req, res) => {
 
     try {
         const publication = await galleryService.share(publicationId, userId);
+        await userService.addToMyShares(userId, publicationId);
         res.redirect('/gallery/details/' + publication._id);
     } catch (error) {
         const errors = [{ msg: error.message }];

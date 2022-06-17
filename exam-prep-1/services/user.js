@@ -43,6 +43,15 @@ exports.addToMyPublication = async function (userId, publicationId) {
     return user;
 };
 
+exports.addToMyShares = async function (userId, publicationId) {
+    const user = await User.findById(userId);
+    user.myShares.push(publicationId);
+
+    await user.save();
+
+    return user;
+};
+
 exports.getById = function (userId) {
     return User.findById(userId);
 };

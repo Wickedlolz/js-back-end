@@ -10,8 +10,6 @@ router.get('/', async (req, res) => {
 
     publications.map((p) => (p.shareCount = p.usersShared.length));
 
-    console.log(publications);
-
     res.render('home', { publications });
 });
 

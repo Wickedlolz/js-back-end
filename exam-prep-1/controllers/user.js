@@ -129,9 +129,7 @@ router.get('/profile/:id', isUser(), async (req, res) => {
         .lean();
 
     const userSharesTitles = user.myShares.map((s) => s.title).join(', ');
-    console.log(userSharesTitles);
 
-    // TODO: viktor: show current user shared publicaiton title separated with ", "
     res.render('profile', { user, userSharesTitles });
 });
 
