@@ -5,10 +5,13 @@
             <h2>Username: {{user.username}}</h2>
             <h3>Address: {{user.adress}}</h3>
             <!--If the user has shared publications, separate their titles with a comma and a space (, )-->
-            <h4>Titles of shared posts by the user: Painting is everything</h4>
-            <!--If not display:-->
-            <!--<h4>Titles of shared posts by the user: Not yet.</h4>-->
-
+            {{#if userSharesTitles}}
+                <h4>Titles of shared posts by the user:
+                    {{userSharesTitles}}</h4>
+                <!--If not display:-->
+            {{else}}
+                <h4>Titles of shared posts by the user: Not yet.</h4>
+            {{/if}}
             <!--If the user has created their own publications, separate their titles with a comma and a space (, )-->
             {{#if user.myPublicationTitles}}
                 <h4>

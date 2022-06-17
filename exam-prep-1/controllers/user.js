@@ -125,14 +125,14 @@ router.get('/profile/:id', isUser(), async (req, res) => {
     const user = await userService
         .getById(userId)
         .populate('myPublication')
+        .populate('myShares')
         .lean();
 
-    user.myPublicationTitles = user.myPublication
-        .map((p) => p.title)
-        .join(', ');
+    const userSharesTitles = user.myShares.map((s) => s.title).join(', ');
+    console.log(userSharesTitles);
 
     // TODO: viktor: show current user shared publicaiton title separated with ", "
-    res.render('profile', { user });
+    res.render('profile', { user, userSharesTitles });
 });
 
 module.exports = router;

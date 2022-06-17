@@ -90,7 +90,6 @@ router.get('/details/:id', async (req, res) => {
         )
             ? false
             : true;
-        console.log(publication);
 
         res.render('details', { publication, isAuthor, canShare });
     } catch (error) {
