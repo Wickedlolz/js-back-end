@@ -23,6 +23,12 @@ const userSchema = new Schema({
             ref: 'Publication',
         },
     ],
+    myShares: [
+        {
+            type: ObjectId,
+            ref: 'Publication',
+        },
+    ],
 });
 
 userSchema.index(

@@ -101,13 +101,15 @@ router.get('/details/:id', async (req, res) => {
 
 router.get('/edit/:id', isCreator(), async (req, res) => {
     const publicationId = req.params.id;
-    const publication = await galleryService.getById(publicationId).lean();
 
-    if (!publication) {
-        res.redirect('/404');
+    try {
+        const publication = await galleryService.getById(publicationId).lean();
+
+        res.render('edit', { publication });
+    } catch (error) {
+        const errors = mapErrors(error);
+        res.render('404', { errors });
     }
-
-    res.render('edit', { publication });
 });
 
 router.post(

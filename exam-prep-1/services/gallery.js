@@ -36,9 +36,12 @@ exports.deleteById = async function (publicationId) {
 
 exports.share = async function (publicationId, userId) {
     const publication = await Publication.findById(publicationId);
+    const user = await userService.getById(userId);
     publication.usersShared.push(userId);
+    user.myShares.push(publicationId);
 
     await publication.save();
+    await user.save();
 
     return publication;
 };
