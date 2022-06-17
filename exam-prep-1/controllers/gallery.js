@@ -76,25 +76,27 @@ router.post(
 
 router.get('/details/:id', async (req, res) => {
     const publicationId = req.params.id;
-    const publication = await galleryService
-        .getById(publicationId)
-        .populate('author')
-        .populate('usersShared')
-        .lean();
 
-    if (!publication) {
-        res.redirect('/404');
+    try {
+        const publication = await galleryService
+            .getById(publicationId)
+            .populate('author')
+            .populate('usersShared')
+            .lean();
+
+        const isAuthor = publication.author._id == res.locals.user?.id;
+        const canShare = publication.usersShared.find(
+            (u) => u._id == res.locals.user?.id
+        )
+            ? false
+            : true;
+        console.log(publication);
+
+        res.render('details', { publication, isAuthor, canShare });
+    } catch (error) {
+        const errors = mapErrors(error);
+        res.render('404', { errors });
     }
-
-    const isAuthor = publication.author._id == res.locals.user?.id;
-    const canShare = publication.usersShared.find(
-        (u) => u._id == res.locals.user?.id
-    )
-        ? false
-        : true;
-    console.log(publication);
-
-    res.render('details', { publication, isAuthor, canShare });
 });
 
 router.get('/edit/:id', isCreator(), async (req, res) => {
