@@ -21,3 +21,7 @@ exports.update = async function (houseId, data) {
 
     return house;
 };
+
+exports.delete = async function (houseId) {
+    await Housing.findByIdAndDelete(houseId);
+};

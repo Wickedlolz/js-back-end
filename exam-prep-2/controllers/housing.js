@@ -93,7 +93,7 @@ router.post(
             }
 
             await houseService.create(data);
-            res.redirect('/housing/rent');
+            res.redirect('/houses');
         } catch (error) {
             const errors = mapErrors(error);
             res.render('create', { errors, data });
@@ -209,5 +209,17 @@ router.post(
         }
     }
 );
+
+router.get('/delete/:id', isCreator(), async (req, res) => {
+    const houseId = req.params.id;
+
+    try {
+        await houseService.delete(houseId);
+        res.redirect('/houses/rent');
+    } catch (error) {
+        const errors = mapErrors(error);
+        res.render('404', { errors });
+    }
+});
 
 module.exports = router;

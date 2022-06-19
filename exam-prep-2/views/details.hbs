@@ -13,10 +13,12 @@
                     <p>{{house.description}}</p>
 
                     <!-- if there are already tenants of the housing, separate their names with a comma and a space ", "  -->
-                    <p>People rented this housing: Alex Petkov, Ivan Dobrev</p>
-
-                    <!-- If not display: -->
-                    <p>People rented this housing: There are no tenants yet.</p>
+                    {{#if peopleRented}}
+                        <p>People rented this housing: Alex Petkov, Ivan Dobrev</p>
+                    {{else}}
+                        <!-- If not display: -->
+                        <p>People rented this housing: There are no tenants yet.</p>
+                    {{/if}}
                 </div>
             </div>
 
@@ -36,12 +38,17 @@
                     {{else}}
 
                         <!-- logged in user with available pieces-->
-                        <a href='#' class='rentHome'>Rent a home, available 2
-                            housing</a>
-                        <p class='alRentHome'>You have already rent this home</p>
-
+                        {{#if canRent}}
+                            <a href='#' class='rentHome'>Rent a home, available
+                                2 housing</a>
+                        {{else}}
+                            <p class='alRentHome'>You have already rent this
+                                home</p>
+                        {{/if}}
                         <!-- logged in user with no available pieces-->
-                        <p class='no-housing'>No Housing Available!</p>
+                        {{#if hasAvailablePieces}}
+                            <p class='no-housing'>No Housing Available!</p>
+                        {{/if}}
                     {{/if}}
                 </div>
             {{/if}}
