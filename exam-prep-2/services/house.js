@@ -25,3 +25,16 @@ exports.update = async function (houseId, data) {
 exports.delete = async function (houseId) {
     await Housing.findByIdAndDelete(houseId);
 };
+
+exports.rent = async function (houseId, userId) {
+    const house = await Housing.findById(houseId);
+
+    if (house.availablePieces - 1 >= 0) {
+        house.rentedHome.push(userId);
+        house.availablePieces = house.availablePieces - 1;
+
+        await house.save();
+
+        return house;
+    }
+};

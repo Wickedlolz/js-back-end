@@ -14,7 +14,7 @@
 
                     <!-- if there are already tenants of the housing, separate their names with a comma and a space ", "  -->
                     {{#if peopleRented}}
-                        <p>People rented this housing: Alex Petkov, Ivan Dobrev</p>
+                        <p>People rented this housing: {{peopleRented}}</p>
                     {{else}}
                         <!-- If not display: -->
                         <p>People rented this housing: There are no tenants yet.</p>
@@ -38,15 +38,20 @@
                     {{else}}
 
                         <!-- logged in user with available pieces-->
-                        {{#if canRent}}
-                            <a href='#' class='rentHome'>Rent a home, available
-                                2 housing</a>
-                        {{else}}
-                            <p class='alRentHome'>You have already rent this
-                                home</p>
-                        {{/if}}
                         <!-- logged in user with no available pieces-->
                         {{#if hasAvailablePieces}}
+                            {{#if canRent}}
+                                <a
+                                    href='/houses/rent/{{house._id}}'
+                                    class='rentHome'
+                                >Rent a home, available
+                                    {{house.availablePieces}}
+                                    housing</a>
+                            {{else}}
+                                <p class='alRentHome'>You have already rent this
+                                    home</p>
+                            {{/if}}
+                        {{else}}
                             <p class='no-housing'>No Housing Available!</p>
                         {{/if}}
                     {{/if}}

@@ -105,9 +105,26 @@ router.get('/details/:id', async (req, res) => {
     const houseId = req.params.id;
 
     try {
-        const house = await houseService.getById(houseId).lean();
-        const isAuthor = house.owner == req.user.id;
-        res.render('details', { house, isAuthor });
+        const house = await houseService
+            .getById(houseId)
+            .populate('rentedHome')
+            .lean();
+        const isAuthor = house.owner == req.user?.id;
+        const canRent = house.rentedHome.find((x) => x._id == req.user?.id)
+            ? false
+            : true;
+
+        const peopleRented = house.rentedHome
+            .map((x) => (x.names = x.name))
+            .join(', ');
+        const hasAvailablePieces = house.availablePieces > 0;
+        res.render('details', {
+            house,
+            isAuthor,
+            canRent,
+            hasAvailablePieces,
+            peopleRented,
+        });
     } catch (error) {
         const errors = mapErrors(error);
         res.render('404', { errors });
@@ -216,6 +233,19 @@ router.get('/delete/:id', isCreator(), async (req, res) => {
     try {
         await houseService.delete(houseId);
         res.redirect('/houses/rent');
+    } catch (error) {
+        const errors = mapErrors(error);
+        res.render('404', { errors });
+    }
+});
+
+router.get('/rent/:id', isUser(), async (req, res) => {
+    const houseId = req.params.id;
+    const userId = req.user.id;
+
+    try {
+        const house = await houseService.rent(houseId, userId);
+        res.redirect('/houses/details/' + house._id);
     } catch (error) {
         const errors = mapErrors(error);
         res.render('404', { errors });
