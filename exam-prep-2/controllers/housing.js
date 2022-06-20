@@ -117,13 +117,19 @@ router.get('/details/:id', async (req, res) => {
         const peopleRented = house.rentedHome
             .map((x) => (x.names = x.name))
             .join(', ');
+
         const hasAvailablePieces = house.availablePieces > 0;
+
+        const isRented = house.rentedHome.find((x) => x._id == req.user?.id);
+        console.log(isRented);
+
         res.render('details', {
             house,
             isAuthor,
             canRent,
             hasAvailablePieces,
             peopleRented,
+            isRented,
         });
     } catch (error) {
         const errors = mapErrors(error);

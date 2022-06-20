@@ -36,23 +36,21 @@
                             class='remove'
                         >Delete</a>
                     {{else}}
-
                         <!-- logged in user with available pieces-->
                         <!-- logged in user with no available pieces-->
-                        {{#if hasAvailablePieces}}
-                            {{#if canRent}}
-                                <a
-                                    href='/houses/rent/{{house._id}}'
-                                    class='rentHome'
-                                >Rent a home, available
-                                    {{house.availablePieces}}
-                                    housing</a>
-                            {{else}}
-                                <p class='alRentHome'>You have already rent this
-                                    home</p>
-                            {{/if}}
-                        {{else}}
+                        {{#if canRent}}
+                            <a
+                                href='/houses/rent/{{house._id}}'
+                                class='rentHome'
+                            >Rent a home, available
+                                {{house.availablePieces}}
+                                housing</a>
+                        {{else if isRented}}
+                            <p class='alRentHome'>You have already rent this
+                                home</p>
+                        {{else if hasAvailablePieces}}
                             <p class='no-housing'>No Housing Available!</p>
+
                         {{/if}}
                     {{/if}}
                 </div>
