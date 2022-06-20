@@ -38,3 +38,10 @@ exports.rent = async function (houseId, userId) {
         return house;
     }
 };
+
+exports.search = function (search) {
+    const options = {
+        type: new RegExp(search, 'i'),
+    };
+    return Housing.find(options);
+};

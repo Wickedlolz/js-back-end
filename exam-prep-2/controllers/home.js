@@ -11,8 +11,14 @@ router.get('/', async (req, res) => {
     res.render('home', { topHouses });
 });
 
-router.get('/search', isUser(), (req, res) => {
-    res.render('search');
+router.get('/search', isUser(), async (req, res) => {
+    const { search } = req.query;
+    if (search != undefined) {
+        const houses = await houseService.search(search).lean();
+        res.render('search', { houses, search });
+    } else {
+        res.render('search', { search });
+    }
 });
 
 module.exports = router;
