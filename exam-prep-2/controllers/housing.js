@@ -93,7 +93,7 @@ router.post(
             }
 
             await houseService.create(data);
-            res.redirect('/houses');
+            res.redirect('/houses/rent');
         } catch (error) {
             const errors = mapErrors(error);
             res.render('create', { errors, data });

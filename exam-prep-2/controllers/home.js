@@ -6,7 +6,8 @@ const { isUser } = require('../middlewares/guards');
 router.get('/', async (req, res) => {
     const topHouses = await houseService
         .getAll()
-        .sort({ _id: 'descending' })
+        .sort({ createdAt: -1 })
+        .limit(3)
         .lean();
     res.render('home', { topHouses });
 });
