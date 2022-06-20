@@ -121,7 +121,6 @@ router.get('/details/:id', async (req, res) => {
         const hasAvailablePieces = house.availablePieces > 0;
 
         const isRented = house.rentedHome.find((x) => x._id == req.user?.id);
-        console.log(isRented);
 
         res.render('details', {
             house,
