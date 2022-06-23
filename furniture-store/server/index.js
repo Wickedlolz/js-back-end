@@ -1,14 +1,14 @@
 const express = require('express');
-const initDb = require('./config/mongoose');
-const config = require('./config/config');
-const routes = require('./config/routes');
+const initDb = require('./src/config/mongoose');
+const config = require('./src/config/config');
+const routes = require('./src/config/routes');
 
 init();
 
 async function init() {
     await initDb();
     const app = express();
-    require('./config/express')(app);
+    require('./src/config/express')(app);
     app.use(routes);
 
     app.listen(config.port, () =>
