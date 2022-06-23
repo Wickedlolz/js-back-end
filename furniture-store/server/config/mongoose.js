@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-const config = require('./config');
+const { DB_CONNECTION } = require('./config');
 
 module.exports = async function () {
     try {
-        await mongoose.connect(config.DB_CONNECTION);
+        await mongoose.connect(DB_CONNECTION);
         console.log('DB connected.');
 
         mongoose.connection.on('error', (error) => {
