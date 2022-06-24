@@ -2,7 +2,7 @@ module.exports = function () {
     return (req, res, next) => {
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader(
-            'Access-Controll-Allow-Methods',
+            'Access-Control-Allow-Methods',
             'GET, POST, PUT, DELETE, OPTIONS, HEAD'
         );
         res.setHeader(

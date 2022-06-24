@@ -24,3 +24,19 @@ exports.create = async function (furnitureData) {
 
     return furniture;
 };
+
+exports.updateById = async function (furnitureId, furnitureData) {
+    const furniture = await Furniture.findById(furnitureId);
+
+    furniture.make = furnitureData.make;
+    furniture.model = furnitureData.model;
+    furniture.year = furnitureData.year;
+    furniture.description = furnitureData.description;
+    furniture.price = furnitureData.price;
+    furniture.img = furnitureData.img;
+    furniture.material = furnitureData.material;
+
+    await furniture.save();
+
+    return furniture;
+};

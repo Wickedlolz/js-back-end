@@ -48,4 +48,30 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.put('/:id', async (req, res) => {
+    const furnitureId = req.params.id;
+
+    const item = {
+        make: req.body.make.trim(),
+        model: req.body.model.trim(),
+        year: Number(req.body.year),
+        description: req.body.description.trim(),
+        price: Number(req.body.price),
+        img: req.body.img.trim(),
+        material: req.body.material.trim(),
+    };
+
+    try {
+        const updatedFurniture = await furnitureService.updateById(
+            furnitureId,
+            item
+        );
+
+        res.status(201).json(updatedFurniture);
+    } catch (error) {
+        const errors = mapErrors(error);
+        res.status(400).json({ message: errors });
+    }
+});
+
 module.exports = router;
