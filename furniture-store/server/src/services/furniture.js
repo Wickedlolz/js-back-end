@@ -4,8 +4,11 @@ exports.getAll = function () {
     return Furniture.find({});
 };
 
+exports.getById = function (furnitureId) {
+    return Furniture.findById(furnitureId);
+};
+
 exports.create = async function (furnitureData) {
-    console.log(furnitureData);
     const furniture = new Furniture({
         make: furnitureData.make,
         model: furnitureData.model,

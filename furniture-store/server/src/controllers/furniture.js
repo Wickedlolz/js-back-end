@@ -35,4 +35,17 @@ router.post('/', isAuth(), async (req, res) => {
     }
 });
 
+router.get('/:id', async (req, res) => {
+    const furnitureId = req.params.id;
+
+    try {
+        const furniture = await furnitureService.getById(furnitureId);
+
+        res.json(furniture);
+    } catch (error) {
+        const errors = mapErrors(error);
+        res.status(400).json({ message: errors });
+    }
+});
+
 module.exports = router;
