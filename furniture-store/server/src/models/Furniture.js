@@ -10,6 +10,7 @@ const furnitureSchema = new Schema({
     year: { type: Number, required: true },
     description: { type: String, required: true },
     price: { type: Number, required: true },
+    img: { type: String, required: true },
     material: { type: String },
     _ownerId: { type: ObjectId, ref: 'User' },
 });
