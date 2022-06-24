@@ -40,3 +40,8 @@ exports.updateById = async function (furnitureId, furnitureData) {
 
     return furniture;
 };
+
+exports.deleteById = async function (furnitureId) {
+    const deletedItem = await Furniture.findByIdAndRemove(furnitureId);
+    return deletedItem;
+};

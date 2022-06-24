@@ -74,4 +74,17 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+router.delete('/:id', async (req, res) => {
+    const furnitureId = req.params.id;
+
+    try {
+        const deletedItem = await furnitureService.deleteById(furnitureId);
+
+        res.json(deletedItem);
+    } catch (error) {
+        const errors = mapErrors(error);
+        res.status(400).json({ message: errors });
+    }
+});
+
 module.exports = router;
