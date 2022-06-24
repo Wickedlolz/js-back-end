@@ -22,6 +22,22 @@ exports.register = async function (email, password) {
     return user;
 };
 
+exports.login = async function (email, password) {
+    const user = await getUserByEmail(email);
+
+    if (!user) {
+        throw new Error('Incorect email or password.');
+    }
+
+    const isIdentical = await compare(password, user.password);
+
+    if (!isIdentical) {
+        throw new Error('Incorect email or password.');
+    }
+
+    return user;
+};
+
 exports.createToken = function (user) {
     const tokenPromise = new Promise((resolve, reject) => {
         jwt.sign(
