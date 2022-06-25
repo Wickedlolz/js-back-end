@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { isAuth } = require('../middlewares/guards');
+const { isAuth, isCreator } = require('../middlewares/guards');
 const furnitureService = require('../services/furniture');
 const { mapErrors } = require('../utils/mapErrors');
 
@@ -48,7 +48,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', isAuth(), isCreator(), async (req, res) => {
     const furnitureId = req.params.id;
 
     const item = {
@@ -74,7 +74,7 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', isAuth(), isCreator(), async (req, res) => {
     const furnitureId = req.params.id;
 
     try {

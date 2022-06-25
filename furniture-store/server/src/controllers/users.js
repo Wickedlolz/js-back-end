@@ -1,8 +1,9 @@
 const router = require('express').Router();
 
+const { isAuth, isGuest } = require('../middlewares/guards');
 const usersService = require('../services/users');
 
-router.post('/register', async (req, res) => {
+router.post('/register', isGuest(), async (req, res) => {
     const data = {
         email: req.body.email.trim().toLocaleLowerCase(),
         password: req.body.password.trim(),
@@ -24,7 +25,7 @@ router.post('/register', async (req, res) => {
     }
 });
 
-router.post('/login', async (req, res) => {
+router.post('/login', isGuest(), async (req, res) => {
     const data = {
         email: req.body.email.trim().toLocaleLowerCase(),
         password: req.body.password.trim(),
@@ -46,7 +47,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.get('/logout', (req, res) => {
+router.get('/logout', isAuth(), (req, res) => {
     usersService.logout(req.user.token);
     res.status(204).end();
 });
