@@ -6,7 +6,7 @@ const { mapErrors } = require('../utils/mapErrors');
 
 router.get('/', async (req, res) => {
     try {
-        const items = await furnitureService.getAll();
+        const items = await furnitureService.getAll(req.query.where);
         res.json(items);
     } catch (error) {
         res.status(400).json({ message: 'Bad request.' });

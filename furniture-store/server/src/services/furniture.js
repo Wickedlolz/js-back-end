@@ -1,7 +1,14 @@
 const Furniture = require('../models/Furniture');
 
-exports.getAll = function () {
-    return Furniture.find({});
+exports.getAll = function (query) {
+    const options = {};
+
+    if (query) {
+        const userId = query.split('=')[1].slice(1, -1);
+        options['_ownerId'] = userId;
+    }
+
+    return Furniture.find(options);
 };
 
 exports.getById = function (furnitureId) {
