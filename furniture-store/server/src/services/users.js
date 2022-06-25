@@ -3,6 +3,8 @@ const { hash, compare } = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET, SALT_ROUNDS } = require('../config/config');
 
+const blacklist = new Set();
+
 exports.register = async function (email, password) {
     const existing = await getUserByEmail(email);
 
@@ -38,6 +40,10 @@ exports.login = async function (email, password) {
     return user;
 };
 
+exports.logout = function (token) {
+    blacklist.add(token);
+};
+
 exports.createToken = function (user) {
     const tokenPromise = new Promise((resolve, reject) => {
         jwt.sign(
@@ -57,6 +63,10 @@ exports.createToken = function (user) {
 };
 
 exports.validateToken = function (token) {
+    if (blacklist.has(token)) {
+        throw new Error('Token is blacklisted.');
+    }
+
     return jwt.verify(token, JWT_SECRET, function (error, decoded) {
         if (error) {
             throw new Error(error.message);
