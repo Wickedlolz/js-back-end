@@ -1,0 +1,41 @@
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8' />
+        <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <title>{{title}} - Crypto Web</title>
+        <link rel='stylesheet' href='/static/css/styles.css' />
+    </head>
+    <body>
+        {{#if errors}}
+            <div class='errorContainer'>
+                {{#each errors}}
+                    <p>{{msg}}</p>
+                {{/each}}
+            </div>
+        {{/if}}
+        <header class='header'>
+            <nav>
+                <img src='/static/images/logo.png' class='logo' />
+                <ul>
+                    <li><a href='/'>Home</a></li>
+                    <li><a href='/trades'>All Crypto</a></li>
+                    {{#if hasUser}}
+                        <li><a href='/trades/search'>Search</a></li>
+                        <li><a href='/trades/create'>Create Offer</a></li>
+                        <li><a href='/users/logout'>Logout</a></li>
+                    {{else}}
+                        <li><a href='/users/login'>Login</a></li>
+                        <li><a href='/users/register'>Register</a></li>
+                    {{/if}}
+                </ul>
+            </nav>
+        </header>
+        <main>
+            {{{body}}}
+        </main>
+        <footer>
+            <p>Back-End 2022</p>
+        </footer>
+    </body>
+</html>

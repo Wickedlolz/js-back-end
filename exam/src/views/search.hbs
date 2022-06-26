@@ -1,0 +1,48 @@
+<section class='crypto-search'>
+    <h1>Search</h1>
+
+    <form class='search-form' action='/trades/search' method='get'>
+        <input
+            type='text'
+            class='search-coin'
+            name='searchCoin'
+            value='{{searchCoin}}'
+            placeholder='Search here...'
+        />
+        <select id='payment' name='paymentMethod'>
+            <option value='crypto-wallet' {{#if cryptos.crypto-wallet}} selected {{/if}}>Crypto Wallet</option>
+            <option value='credit-card' {{#if cryptos.credit-card}} selected {{/if}}>Credit Card</option>
+            <option value='debit-card' {{#if cryptos.debit-card}} selected {{/if}}>Debit Card</option>
+            <option value='paypal' {{#if cryptos.paypal}} selected {{/if}}>PayPal</option>
+        </select>
+        <button type='submit' class='btn-search'>Search</button>
+    </form>
+
+    {{#if cryptos}}
+        <div class='search-result'>
+            <div class='search-list'>
+                {{#each cryptos}}
+                    <div class='coin'>
+                        <div class='coin-img'>
+                            <img src='{{image}}' />
+                        </div>
+                        <div class='coin-info'>
+                            <h1>{{name}}</h1>
+                            <p><span>Price: </span>${{price}}</p>
+                            <p><span>Payment: </span>{{paymentMethod}}</p>
+                        </div>
+
+                        <a
+                            href='/trades/details/{{_id}}'
+                            class='btn-details'
+                        >Details</a>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    {{else}}
+        <div class='no-match'>
+            <p>No match was found!</p>
+        </div>
+    {{/if}}
+</section>
